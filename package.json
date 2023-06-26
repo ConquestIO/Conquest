@@ -2,7 +2,6 @@
   "name": "test-tracker",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "type": "module",
   "scripts": {
     "start": "NODE_ENV=production node server/server.js",
@@ -17,6 +16,7 @@
     "@babel/plugin-transform-runtime": "^7.22.5",
     "@babel/preset-env": "^7.22.5",
     "@babel/preset-react": "^7.22.5",
+    "autoprefixer": "^10.4.14",
     "babel-loader": "^9.1.2",
     "concurrently": "^8.2.0",
     "css-loader": "^6.8.1",

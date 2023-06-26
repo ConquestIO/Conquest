@@ -2,7 +2,7 @@ import path from 'path';
 import HTMLWebpackPlugin from 'html-webpack-plugin';
 
 export default {
-  entry: './src/index.js',
+  entry: './src/index.jsx',
 
   mode: process.env.NODE_ENV,
 
@@ -39,16 +39,10 @@ export default {
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-env', '@babel/preset-react'],
-            plugins: ['@babel/plugin-transform-runtime', '@babel/transform-async-to-generator'],
-          },
-        },
+        use: 'babel-loader',
       },
       {
-        test: /.(css|scss)$/,
+        test: /\.css$/i,
         exclude: [/node_modules/],
         use: ['style-loader', 'css-loader', 'postcss-loader'],
       },
