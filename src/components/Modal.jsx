@@ -1,4 +1,4 @@
-import { ReactNode, useLayoutEffect, useRef } from 'react';
+import { useLayoutEffect, useRef } from 'react';
 
 const Modal = ({ children, open, onClose }) => {
   const ref = useRef(null);

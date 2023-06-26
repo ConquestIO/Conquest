@@ -1,6 +1,6 @@
 import { useState, useContext, ChangeEvent } from 'react';
 import Button from '../../../components/Button';
-import Modal from './Modal';
+import Modal from '../../../components/Modal';
 import LoginForm from './LoginForm';
 import SignupForm from './SignupForm';
 // import { UserContext } from '../../../contexts/userContexts';

@@ -1,4 +1,4 @@
-import AuthContainer from "./Auth/AuthContainer";
+import AuthContainer from './Auth/AuthContainer';
 
 const Navbar = () => {
   return (
