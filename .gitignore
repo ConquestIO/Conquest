@@ -1,0 +1,15 @@
+# general
+.DS_store
+
+#dependencies
+node_modules
+
+
+#logs
+npm-debug.log*
+
+# output from webpack
+dist/
+
+#security
+.env
