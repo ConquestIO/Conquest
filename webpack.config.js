@@ -44,6 +44,7 @@ export default {
       {
         test: /\.css$/i,
         exclude: [/node_modules/],
+        include: path.resolve(path.resolve(), 'src'),
         use: ['style-loader', 'css-loader', 'postcss-loader'],
       },
     ],
