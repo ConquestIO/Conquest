@@ -26,10 +26,10 @@ export default function SideBarContainer() {
             ${el.featureName}
         </button>,
     }),
-        //logout button for sidebar
+        //logout button for sidebar. Clear userId, set logged in to false and reroute to landing page
         <button
         onClick={async () => {
-                await fetch('/api/user/logout');
+                dispatch(userID('none'))
                 dispatch(setLoggedIn(false));
                 navigate('/');
         }}
