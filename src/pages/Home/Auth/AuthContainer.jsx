@@ -34,7 +34,7 @@ const AuthContainer = () => {
 
   return (
     <div>
-      <ul className='flex'>
+      <ul className='flex gap-3'>
         <li>
           <Button
             className='mx-0 drop-shadow-sm'
