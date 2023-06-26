@@ -1,16 +1,22 @@
-import express from 'express'
+import express from 'express';
 import path from 'path';
 const app = express();
+import userRouter from './routes/userRouter';
+import apiRouter from './routes/apiRouter';
+// import authController from './controllers/authController';
+import cookieParser from 'cookie-parser';
 
 const PORT = 3000;
 
-// we need something to parse request body
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 //request to router
 app.use('/test', (req,res) => res.send('IT WORKS'));
 
+app.use('/users', userRouter);
+app.use('/api', apiRouter);
 
 // if running from production, serve bundled files
 if (process.env.NODE_ENV === 'production') {
@@ -21,7 +27,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 //catch-all route handler for any requests
-app.use((req, res) => res.status(404).send('This page does not exist'));
+app.use('*', (req, res) => res.status(404).send('This page does not exist'));
 
 //express error handler
 app.use((err, req, res, next) => {
@@ -36,9 +42,4 @@ app.use((err, req, res, next) => {
 });
 
 // start server
-
-const server = app.listen(PORT, () => {
-  console.log(`Server listening on port: ${PORT}...`);
-});
-
-export default server;
+export default app.listen(PORT, () => console.log('listening on port ', PORT));
