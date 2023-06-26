@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
+    userID: 'none',
     features: {},
     tests: {},
     loggedIn: false,
@@ -14,6 +15,9 @@ const appSlice = createSlice({
     name: 'app',
     initialState,
     reducers: {
+        setUserID: (state, action) => {
+            state.user = action.payload
+        },
         setFeatures: (state, action) => {
             state.features = action.payload;
         },
