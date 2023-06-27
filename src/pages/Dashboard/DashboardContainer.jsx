@@ -17,7 +17,7 @@ export default function DashboardContainer(){
     })
 
     return (
-        <div>
+        <div className= "flex flex-row">
             <SideBarContainer />
             <TestDisplay />
         </div>

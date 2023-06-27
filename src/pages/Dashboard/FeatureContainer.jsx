@@ -10,7 +10,7 @@ const FeatureContainer = () => {
   
   
     return (
-      <div>
+      <div className = 'justify-center'>
         <ul className='flex gap-3'>
           <li>
             <Button
