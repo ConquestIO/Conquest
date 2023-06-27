@@ -2,7 +2,8 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
     userID: 'none',
-    features: {},
+    features: [],
+    featureID: 'none',
     tests: {},
     loggedIn: false,
     loginModal: closed,
@@ -20,6 +21,9 @@ const appSlice = createSlice({
         },
         setFeatures: (state, action) => {
             state.features = action.payload;
+        },
+        setFeatureID: (state, action) => {
+            state.featureID = action.payload;
         },
         setTests: (state, action) => {
             state.tests = action.payload;
@@ -42,7 +46,8 @@ const appSlice = createSlice({
     },
 });
 
-export const { setUserID, setFeatures, setTests, setLoggedIn, setLoginModal, setSignupModal, setFeatureModal, setTestModal } = appSlice.actions;
+export const { setUserID, setFeatures, setFeatureID, setTests, setLoggedIn, setLoginModal, setSignupModal,
+     setFeatureModal, setTestModal } = appSlice.actions;
 
 export default appSlice.reducer
 
