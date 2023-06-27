@@ -21,8 +21,8 @@ export default function DashboardContainer(){
     return (
         <div>
             <SideBarContainer />
-            <FeatureDisplay /> 
             <TestButton />
+            <FeatureDisplay /> 
             <TestDisplay />
         </div>
     );

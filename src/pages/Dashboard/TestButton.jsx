@@ -1,6 +1,7 @@
 import React from "react";
 import Button from '../../components/Button';
 import Modal from '../../components/Modal';
+import TestForm from "./TestForm";
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { setTestModal } from '../../store/appSlice';
 
@@ -17,20 +18,20 @@ const TestButton = () => {
       };
     
       return (
-        <div className="max-w-md mx-auto ml-auto mt-4">
+        <div className='max-w-md mx-auto ml-auto mt-4 flex justify-end'>
           <Button
-            className="ml-auto"
+            className='ml-auto'
             onClick={handleButtonClick}
-            variant="secondary" // Example additional prop for Button
+            variant='secondary' 
           >
             Add Test
           </Button>
           <Modal
             open={openTestModal}
             onClose={handleCloseModal}
-            size="small" // Example additional prop for Modal
+             
           >
-            {/* Your modal content goes here */}
+            <TestForm />
           </Modal>
         </div>
       );
