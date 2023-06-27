@@ -4,6 +4,7 @@ import { setFeatures } from '../../store/appSlice';
 import TestDisplay from './TestDisplay';
 import SideBarContainer from './SideBarContainer';
 import FeatureDisplay from './FeatureDisplay';
+import TestButton from './TestButton';
 
 export default function DashboardContainer(){
     const dispatch = useAppDispatch();
@@ -20,7 +21,8 @@ export default function DashboardContainer(){
     return (
         <div>
             <SideBarContainer />
-            <FeatureDisplay />
+            <FeatureDisplay /> 
+            <TestButton />
             <TestDisplay />
         </div>
     );
