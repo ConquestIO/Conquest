@@ -1,4 +1,4 @@
-import express from 'express';
+import express from 'express'
 import path from 'path';
 const app = express();
 // import userRouter from './routes/userRouter';
@@ -16,6 +16,7 @@ app.use(cookieParser());
 // app.use('/test', (req,res) => res.send('IT WORKS'));
 // app.use('/user', userRouter);
 // app.use('/api', apiRouter);
+
 
 // if running from production, serve bundled files
 if (process.env.NODE_ENV === 'production') {

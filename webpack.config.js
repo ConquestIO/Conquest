@@ -31,7 +31,8 @@ export default {
     port: 8080,
     hot: true,
     proxy: {
-      '/': 'http://localhost:3000/',
+      '/user': 'http://localhost:3000/',
+      '/api': 'http://localhost:3000/',
     },
   },
   module: {
@@ -40,6 +41,9 @@ export default {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: 'babel-loader',
+        resolve: {
+          fullySpecified: false
+        }
       },
       {
         test: /\.css$/i,

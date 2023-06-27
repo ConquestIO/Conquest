@@ -1,9 +1,12 @@
 import React from 'react';
-import './index.css'
+import Home from './pages/Home';
+import { Route, Routes } from 'react-router-dom';
+
 const App = () => (
-  <div className='bg-blue-700 text-blue-500 font-bold text-4xl'>
-    Hello
-  </div>
+  <Routes>
+    <Route path='/' element={<Home />} />
+    <Route path='/dashboard' element={(<div>REPLACE WITH DASHBOARD CONTAINER</div>)} />
+  </Routes>
 );
 
 export default App;
