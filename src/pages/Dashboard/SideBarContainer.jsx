@@ -11,7 +11,6 @@ export default function SideBarContainer() {
     const featureID = useAppSelector((state) => state.app.featureID)
     const navigate = useNavigate();
 
-
     let sidebar = [
         //add feature button (cant just update state because it will delete so we have to copy state and then add)
         <button
@@ -23,8 +22,8 @@ export default function SideBarContainer() {
             Add Feature
         </button>,
         //Render a button for each created feature (may have to switch to map)
-        features.forEach((el) => {
-            <button
+        ...features.map((el) => {
+            return (<button
             onClick = {async () => {
                 //update state to be the current element
                 dispatch(setFeatureID(el));
@@ -34,8 +33,8 @@ export default function SideBarContainer() {
                 .then((res) => dispatch(setTests(res)))
             }}
             >
-            ${el.featureName}
-            </button>
+            {el.featureName}
+            </button>)
         }),
         //logout button for sidebar. Clear userId, set logged in to false and reroute to landing page
         <button
@@ -48,7 +47,7 @@ export default function SideBarContainer() {
             Logout
         </button>,
     ]
-
+    console.log(sidebar)
     return (
         <div>
             {sidebar}
