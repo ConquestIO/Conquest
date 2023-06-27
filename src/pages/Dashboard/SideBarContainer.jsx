@@ -15,14 +15,15 @@ export default function SideBarContainer() {
     let sidebar = [
         //Render a button for each created feature (may have to switch to map)
         ...features.map((el) => {
-            return (<div><button
+            return (<div key={el.id}><button
+              key={el.id}
             onClick = {async () => {
                 //update state to be the current element
                 dispatch(setFeatureID(el));
                 //fetch all tests associated with the feature for the given user
-                await fetch(`/api/${userID}/${featureID.id}/tests`)
+                await fetch(`/api/tests/${featureID.id}`)
                 //this will update tests in state to be the response which can then be rendered by TestDisplay
-                .then((res) => dispatch(setTests(res)))
+                dispatch(setTests(res))
             }}
             >
             {el.featureName}
@@ -31,6 +32,7 @@ export default function SideBarContainer() {
         }),
         //logout button for sidebar. Clear userId, set logged in to false and reroute to landing page
         <button
+        key={'button'}
         onClick={async () => {
                 dispatch(userID('none'))
                 dispatch(setLoggedIn(false));
@@ -40,7 +42,6 @@ export default function SideBarContainer() {
             Logout
         </button>,
     ]
-    console.log(sidebar)
     return (
         <div>
             <FeatureContainer />
