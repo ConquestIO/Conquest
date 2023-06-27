@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { setLoggedIn, setFeatureID, setTests } from '../../store/appSlice';
+import { setLoggedIn, setFeatureID, setTests, updateFeatures } from '../../store/appSlice';
 
 export default function SideBarContainer() {
     const dispatch = useAppDispatch();
@@ -13,9 +13,11 @@ export default function SideBarContainer() {
 
 
     sidebar = [
+        //add feature button (cant just update state because it will delete so we have to copy state and then add)
         <button
         onClick = {async () => {
-            dispatch(set)
+            //will have to open a popup modal that then takes info and will have logic to update state with special reducer
+            
         }}
         >
             Add Feature

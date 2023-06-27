@@ -46,8 +46,8 @@ const appSlice = createSlice({
     },
 });
 
-export const { setUserID, setFeatures, setFeatureID, setTests, setLoggedIn, setLoginModal, setSignupModal, setFeatureModal, setTestModal }
- = appSlice.actions;
+export const { setUserID, setFeatures, setFeatureID, setTests, setLoggedIn, setLoginModal, setSignupModal,
+     setFeatureModal, setTestModal } = appSlice.actions;
 
 export default appSlice.reducer
 
