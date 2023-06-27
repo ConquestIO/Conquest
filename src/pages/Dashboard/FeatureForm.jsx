@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Button from '../../components/Button'
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { setFeatures } from '../../store/appSlice';
@@ -25,16 +25,39 @@ import Select from 'react-select'
     //     </button>
     // ]
 
-    const FeatureForm = ({
-        setFeature,
-        setPassword,
-        featureInputId,
-        passwordInputId,
-        text,
-        handleSubmit,
-        value,
-      }) => {
-      
+    const FeatureForm = () => {
+
+      const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+          const res = await fetch('/api/features', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'Application/JSON',
+            },
+            body: JSON.stringify({
+              feature,
+              status,
+              test
+            }),
+          });
+          if (res.status === 204) {
+            await res.json()
+            //need to update redux state to store new feature list when done
+            .then((res) => dispatch(setFeatures(res)))
+            
+          } else {
+            alert('Failed to add new feature');
+          }
+        } catch (err) {
+          console.log('Log in: ERROR: ', err);
+        }
+      };
+        const dispatch = useAppDispatch();
+        const [feature, setFeature] = useState('none')
+        const [status, setStatus] = useState('none');
+        const [test, setTest] = useState('none');
+
         const tests = [
           { value:'unitTest', label: "Unit Tests" },
           { value:'integrationTest', label: "Integration Tests" },
@@ -57,26 +80,22 @@ import Select from 'react-select'
               <div className='mb-4'>
                 <label
                   className='mb-2 block text-sm font-bold text-gray-700'
-                  htmlFor={featureInputId}
                 >
-                  Feature Name
                 </label>
                 <input
                   className='focus:shadow-outline w-full appearance-none rounded border bg-white px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none'
-                  id={featureInputId}
                   type='text'
-                  placeholder='Feature'
-                  value={value}
+                  placeholder='Feature Name'
                   required
                   onChange={(e) => setFeature(e.target.value)}
                   spellCheck='false'
                 />
               </div>
               <div className='mb-6 bg-blue'>
-                <Select options={statuses} placeholder='Select A Status' />
+                <Select options={statuses} onChange={e => setStatus(e.value)} placeholder='Select A Status' />
               </div>
               <div className='mb-6'>
-                <Select options={tests} placeholder='Select A Test' />
+                <Select options={tests} onChange={e => setTest(e.value)} placeholder='Select A Test' />
               </div>
               <div className='flex items-center justify-center'>
                 <Button type='submit' variant='secondary' size='lg'>
