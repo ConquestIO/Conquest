@@ -50,8 +50,8 @@ export default function SideBarContainer() {
     ]
 
     return (
-        <Nav>
+        <div>
             {sidebar}
-        </Nav>
+        </div>
     );
 }
