@@ -1,12 +1,12 @@
-const express = require('express');
-const featuresRouter = require('./featuresRouter');
-const testsRouter = require('./testsRouter');
+import express from 'express'
+import featuresRouter from './featuresRouter.js';
+import testsRouter from './testsRouter.js';
 
 const apiRouter = express.Router();
 
-apiRouter.use('/:userId/features', featuresRouter);
-apiRouter.use('/:userId/tests', testsRouter);
+apiRouter.use('/features', featuresRouter);
+apiRouter.use('/tests', testsRouter);
 
 apiRouter.use('*', (req, res) => res.status(404).send('Page not found'));
 
-module.exports = apiRouter;
+export default apiRouter;

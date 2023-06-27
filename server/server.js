@@ -1,22 +1,27 @@
 import express from 'express'
 import path from 'path';
 const app = express();
-// import userRouter from './routes/userRouter';
-// import apiRouter from './routes/apiRouter';
-// import authenticateController from './controllers/authenticateController';
+import userRouter from './routes/userRouter.js';
+import apiRouter from './routes/apiRouter.js';
+import authenticateController from './controllers/authenticateController.js';
 import cookieParser from 'cookie-parser';
+import cors from 'cors';
 
 const PORT = 3000;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+app.use(cors());
 
 //request to router
-// app.use('/test', (req,res) => res.send('IT WORKS'));
-// app.use('/user', userRouter);
-// app.use('/api', apiRouter);
-
+app.use('/test', (req,res) => res.send('IT WORKS'));
+app.use('/user', userRouter);
+app.use(
+  '/api',
+  authenticateController.authenticateUser,
+  apiRouter
+);
 
 // if running from production, serve bundled files
 if (process.env.NODE_ENV === 'production') {

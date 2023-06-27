@@ -1,6 +1,5 @@
 import express from 'express';
-// import authenticateController from '../controllers/authenticateController';
-import userController from '../controllers/userController';
+import userController from '../controllers/userController.js';
 
 const userRouter = express.Router();
 
@@ -14,15 +13,9 @@ userRouter.post(
 userRouter.post(
   '/login',
   userController.loginUser,
-  (req, res, next) => res.status(204).json(res.locals.userId));
-
-// userRouter.get(
-//   '/authenticate',
-  // authenticateController.authenticate,
-  // userController.userInfo,
-//   (req, res, next) => res.status(200).send(res.locals.user),
-// );
+  (req, res, next) => res.status(200).json(res.locals.userId)
+);
 
 userRouter.use('*', (req, res) => res.status(404).send('Page not found'));
 
-module.exports = userRouter;
+export default userRouter;

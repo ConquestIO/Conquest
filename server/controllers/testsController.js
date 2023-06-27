@@ -1,16 +1,31 @@
 const testsController = {
-  retrieveTestsList: async (req, res, next) => {
+  getTestsList: async(req, res, next) => {
+    res.locals.testsList = [
+                            {
+                              id: 1n,
+                              testName: 'unit test',
+                              description: 'unit test details',
+                              status: 'completed',
+                              category: 'unitTest',
+                              featureId: 1n,
+                              createdOn: new Date(),
+                            }
+                          ];
+    return next();
+  },
+
+  createTest: async(req, res, next) => {
+
+    return next();
 
   },
 
-  createTest: async (req, res, next) => {
+  updateTest: async(req, res, next) => {
 
-  },
-
-  updateTest: async (req, res, next) => {
+    return next();
 
   }
 
 };
 
-module.exports = testsController;
+export default testsController;
