@@ -13,19 +13,27 @@ export default function SideBarContainer() {
 
 
     sidebar = [
+        <button
+        onClick = {async () => {
+            dispatch(set)
+        }}
+        >
+            Add Feature
+        </button>,
         //Render a button for each created feature (may have to switch to map)
-    features.forEach((el) => {
+        features.forEach((el) => {
             <button
-            onClick={async () => {
+            onClick = {async () => {
                 //update state to be the current element
                 dispatch(setFeatureID(el));
                 //fetch all tests associated with the feature for the given user
                 await fetch(`/api/${userID}/${featureID.id}/tests`)
+                //(still need to write logic )
             }}
             >
             ${el.featureName}
-        </button>,
-    }),
+            </button>,
+        }),
         //logout button for sidebar. Clear userId, set logged in to false and reroute to landing page
         <button
         onClick={async () => {
