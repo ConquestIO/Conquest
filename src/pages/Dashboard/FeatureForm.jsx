@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Button from '../../components/Button'
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { setFeatures } from '../../store/appSlice';
+import { setFeatures, setFeatureModal } from '../../store/appSlice';
 import Select from 'react-select'
 // export default function FeatureForm() {
 //     const dispatch = useAppDispatch();
@@ -27,32 +27,6 @@ import Select from 'react-select'
 
     const FeatureForm = () => {
 
-      const handleSubmit = async (e) => {
-        e.preventDefault();
-        try {
-          const res = await fetch('/api/features', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'Application/JSON',
-            },
-            body: JSON.stringify({
-              feature,
-              status,
-              test
-            }),
-          });
-          if (res.status === 204) {
-            await res.json()
-            //need to update redux state to store new feature list when done
-            .then((res) => dispatch(setFeatures(res)))
-            
-          } else {
-            alert('Failed to add new feature');
-          }
-        } catch (err) {
-          console.log('Log in: ERROR: ', err);
-        }
-      };
         const dispatch = useAppDispatch();
         const [feature, setFeature] = useState('none')
         const [status, setStatus] = useState('none');
@@ -70,6 +44,35 @@ import Select from 'react-select'
           { value:'inProgress', label: "In Progress" },
           { value:'completed', label: "Completed" },
         ]
+
+        const handleSubmit = async (e) => {
+          console.log(feature)
+          e.preventDefault();
+          try {
+            dispatch(setFeatureModal(closed))
+            const res = await fetch('/api/features', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'Application/JSON',
+              },
+              body: JSON.stringify({
+                feature,
+                status,
+                test
+              }),
+            });
+            if (res.status === 204) {
+              await res.json()
+              //need to update redux state to store new feature list when done
+              .then((res) => dispatch(setFeatures(res)))
+              
+            } else {
+              alert('Failed to add new feature');
+            }
+          } catch (err) {
+            console.log('Log in: ERROR: ', err);
+          }
+        };
 
         return (
           <>
