@@ -3,6 +3,7 @@ import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { setFeatures } from '../../store/appSlice';
 import TestDisplay from './TestDisplay';
 import SideBarContainer from './SideBarContainer';
+import FeatureDisplay from './FeatureDisplay';
 
 export default function DashboardContainer(){
     const dispatch = useAppDispatch();
@@ -19,6 +20,7 @@ export default function DashboardContainer(){
     return (
         <div>
             <SideBarContainer />
+            <FeatureDisplay />
             <TestDisplay />
         </div>
     );
