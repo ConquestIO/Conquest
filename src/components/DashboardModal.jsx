@@ -26,7 +26,7 @@ const DashboardModal = ({ children, open, onClose }) => {
 
   return (
     <dialog
-      className='absolute bottom-5 top-5 mb-4 rounded bg-white px-8 pb-8 pt-6 shadow-md'
+      className='absolute bottom-1/3 top-1/3 mb-4 rounded bg-white px-8 pb-8 pt-6 shadow-md'
       ref={ref}
       onClick={(e) => {
         const dialogDimensions = e.currentTarget.getBoundingClientRect();

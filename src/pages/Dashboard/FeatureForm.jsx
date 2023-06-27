@@ -2,7 +2,7 @@ import React from 'react';
 import Button from '../../components/Button'
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { setFeatures } from '../../store/appSlice';
-
+import Dropdown from 'react-bootstrap/Dropdown'
 // export default function FeatureForm() {
 //     const dispatch = useAppDispatch();
 //     const features = useAppSelector((state) => state.app.features);
@@ -35,6 +35,16 @@ import { setFeatures } from '../../store/appSlice';
         value,
       }) => {
       
+        const tests = [
+            'Unit Tests', 'Integration Tests', 'Functional Tests', 'E2E Tests'
+        ];
+        const defaultTest = tests[0];
+
+        const statuses = [
+            'Not Started', 'In Progress', 'Completed'
+        ];
+        const defaultStatus = statuses[0];
+
         return (
           <>
             <p className='mb-4 block text-center text-xl font-bold text-gray-700'>
@@ -60,38 +70,31 @@ import { setFeatures } from '../../store/appSlice';
                 />
               </div>
               <div className='mb-6'>
-                <label
-                  className='mb-2 block text-sm font-bold text-gray-700'
-                  htmlFor={passwordInputId}
-                >
-                  Status
-                </label>
-                <input
-                  className='focus:shadow-outline mb-3 w-full appearance-none rounded border bg-white px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none'
-                  id={passwordInputId}
-                  type='password'
-                  placeholder='******************'
-                  required
-                  onChange={(e) => setPassword(e.target.value)}
-                />
+                <Dropdown>
+                    <Dropdown.Toggle variant='success' id='dropdown-basic'>
+                        Select A Status
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu>
+                        <Dropdown.Item href='#/action1' >Not Started</Dropdown.Item>
+                        <Dropdown.Item href='#/action2' >In Progress</Dropdown.Item>
+                        <Dropdown.Item href='#/action3' >Functional Tests</Dropdown.Item>
+                        <Dropdown.Item href='#/action3' >E2E Tests</Dropdown.Item>
+                    </Dropdown.Menu>
+                </Dropdown>
               </div>
               <div className='mb-6'>
-                <label
-                  className='mb-2 block text-sm font-bold text-gray-700'
-                  htmlFor={passwordInputId}
-                >
-                  Category
-                </label>
-                <input
-                  className='focus:shadow-outline mb-3 w-full appearance-none rounded border bg-white px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none'
-                  id={passwordInputId}
-                  type='password'
-                  placeholder='******************'
-                  required
-                  onChange={(e) => setPassword(e.target.value)}
-                />
+              <Dropdown>
+                    <Dropdown.Toggle variant='success' id='dropdown-basic'>
+                        Select A Category
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu>
+                        <Dropdown.Item href='#/action1' >Unit Tests</Dropdown.Item>
+                        <Dropdown.Item href='#/action2' >Integration Tests</Dropdown.Item>
+                        <Dropdown.Item href='#/action3' >Completed</Dropdown.Item>
+                    </Dropdown.Menu>
+                </Dropdown>
               </div>
-              <div className='flex items-center justify-between'>
+              <div className='flex items-center justify-center'>
                 <Button type='submit' variant='secondary' size='lg'>
                   Save
                 </Button>
