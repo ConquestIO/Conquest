@@ -3,8 +3,6 @@ import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { setFeatures } from '../../store/appSlice';
 import TestDisplay from './TestDisplay';
 import SideBarContainer from './SideBarContainer';
-import FeatureDisplay from './FeatureDisplay';
-import TestButton from './TestButton';
 
 export default function DashboardContainer(){
     const dispatch = useAppDispatch();
@@ -19,10 +17,8 @@ export default function DashboardContainer(){
     })
 
     return (
-        <div>
+        <div className='flex w-full h-screen'>
             <SideBarContainer />
-            <TestButton />
-            <FeatureDisplay /> 
             <TestDisplay />
         </div>
     );

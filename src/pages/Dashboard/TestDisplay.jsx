@@ -1,22 +1,16 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { setFeatures, setFeatureModal, setTestModal } from '../../store/appSlice';
 import TestChart from './TestChart';
+import TestButton from './TestButton';
+import FeatureDisplay from './FeatureDisplay';
 
-export default function TestDisplay(){
-    const dispatch = useAppDispatch();
-    
-    const features = useAppSelector((state) => state.app.features)
-    const userID = useAppSelector((state) => state.app.userID)
-    const featureID = useAppSelector((state) => state.app.featureID)
-    const navigate = useNavigate();
-
-
-    return (
-        <div>
-          <TestChart />
-        </div>
-    );
-
-}
+export default function TestDisplay() {
+  return (
+    <div className='flex flex-col p-6 gap-12 items-center w-full border-l'>
+      <div className='flex justify-between w-full items-center'>
+        <FeatureDisplay />
+        <TestButton />
+      </div>
+      <TestChart />
+    </div>
+  );
+};
