@@ -1,3 +1,3 @@
-const authController = {};
+const authenticateController = {};
 
-module.exports = authController;
+module.exports = authenticateController;
