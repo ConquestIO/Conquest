@@ -6,7 +6,7 @@ const testsRouter = express.Router();
 testsRouter.get(
   '/:featureId',
   testsController.getTestsList,
-  (req, res, next) => res.status(200).json(res.locals.testsList)
+  (req, res, next) => res.status(200).send(res.locals.testsList)
 );
 
 testsRouter.post(

@@ -4,13 +4,15 @@
 
 const userController = {
   registerUser: async (req, res, next) => {
-      res.locals.userId = 1n;
-      return next();
+    console.log('<--userController - registerUser is invoked-->');
+
+    return next();
   },
 
   loginUser: async (req, res, next) => {
-        res.locals.user = 1n;
-        return next();
+    console.log('<--userController - loginUser is invoked-->');
+
+    return next();
   }
 };
 

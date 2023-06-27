@@ -1,4 +1,4 @@
-import express from 'express'
+import express from 'express';
 import featuresRouter from './featuresRouter.js';
 import testsRouter from './testsRouter.js';
 

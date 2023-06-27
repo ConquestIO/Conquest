@@ -1,26 +1,21 @@
 const testsController = {
   getTestsList: async(req, res, next) => {
-    res.locals.testsList = [
-                            {
-                              id: 1n,
-                              testName: 'unit test',
-                              description: 'unit test details',
-                              status: 'completed',
-                              category: 'unitTest',
-                              featureId: 1n,
-                              createdOn: new Date(),
-                            }
-                          ];
+    console.log('<--testsController - getTestsList is invoked-->');
+
+    res.locals.testsList = [];
+
     return next();
   },
 
   createTest: async(req, res, next) => {
+    console.log('<--testsController - createTest is invoked-->');
 
     return next();
 
   },
 
   updateTest: async(req, res, next) => {
+    console.log('<--testsController - updateTest is invoked-->');
 
     return next();
 

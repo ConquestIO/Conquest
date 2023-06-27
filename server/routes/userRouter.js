@@ -7,13 +7,13 @@ userRouter.post(
   '/register',
   userController.registerUser,
   userController.loginUser,
-  (req, res, next) => res.status(201).json(res.locals.userId)
+  (req, res, next) => res.sendStatus(201)
 );
 
 userRouter.post(
   '/login',
   userController.loginUser,
-  (req, res, next) => res.status(200).json(res.locals.userId)
+  (req, res, next) => res.sendStatus(200)
 );
 
 userRouter.use('*', (req, res) => res.status(404).send('Page not found'));

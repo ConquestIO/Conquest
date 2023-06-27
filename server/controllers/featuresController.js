@@ -2,21 +2,16 @@
 
 const featuresController = {
   getFeaturesList: async (req, res, next) => {
+    console.log('<--featuresController - getFeaturesList is invoked-->');
 
-    res.locals.featuresList = [
-                                {
-                                  id: 1n,
-                                  featureName: 'signup',
-                                  description: 'signup modal',
-                                  createdOn: new Date(),
-                                  userId: 1n,
-                                }
-                              ]
+    res.locals.featuresList = [];
 
     return next();
   },
 
   createFeature: async (req, res, next) => {
+    console.log('<--featuresController - createFeature is invoked-->');
+
     return next();
   }
 

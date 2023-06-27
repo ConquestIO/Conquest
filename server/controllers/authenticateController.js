@@ -2,6 +2,8 @@
 
 const authenticateController = {
   authenticateUser: async(req, res, next) => {
+    console.log('<--authenticateController - authenticateUser is invoked-->');
+
     next();
   }
 

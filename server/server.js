@@ -15,7 +15,7 @@ app.use(cookieParser());
 app.use(cors());
 
 //request to router
-app.use('/test', (req,res) => res.send('IT WORKS'));
+// app.use('/test', (req,res) => res.send('IT WORKS'));
 app.use('/user', userRouter);
 app.use(
   '/api',
@@ -32,7 +32,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 //catch-all route handler for any requests
-app.use('*', (req, res) => res.status(404).send('This page does not exist'));
+app.use('*', (req, res) => res.status(404).send('Page not found'));
 
 //express error handler
 app.use((err, req, res, next) => {
