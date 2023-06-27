@@ -14,7 +14,7 @@ const FeatureContainer = () => {
         <ul className='flex gap-3'>
           <li>
             <Button 
-              className='mx-0 drop-shadow-sm rounded-md bg-sky-600 w-40 h-10 text-white'
+              className='mx-0 drop-shadow-sm rounded-md bg-sky-600 w-40 h-10 text-base text-white'
               onClick={() => dispatch(setFeatureModal(true))}
             >
               Add Feature
