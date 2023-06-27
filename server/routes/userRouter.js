@@ -4,7 +4,7 @@ import userController from "../controllers/userController.js";
 const userRouter = express.Router();
 
 userRouter.post("/register", userController.registerUser, (req, res) => {
-  return res.status(201).json(res.locals.user);
+  return res.sendStatus(201);
 });
 
 userRouter.post("/login", userController.loginUser, (req, res) => {
