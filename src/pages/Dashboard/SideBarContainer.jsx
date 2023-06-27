@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { setLoggedIn, setFeatureID, setFeatures } from '../../store/appSlice';
+import { setLoggedIn, setFeatureID, setTests } from '../../store/appSlice';
 
 export default function SideBarContainer() {
     const dispatch = useAppDispatch();
@@ -28,7 +28,8 @@ export default function SideBarContainer() {
                 dispatch(setFeatureID(el));
                 //fetch all tests associated with the feature for the given user
                 await fetch(`/api/${userID}/${featureID.id}/tests`)
-                //(still need to write logic )
+                //this will update tests in state to be the response which can then be rendered by TestDisplay
+                .then((res) => dispatch(setTests(res)))
             }}
             >
             ${el.featureName}
