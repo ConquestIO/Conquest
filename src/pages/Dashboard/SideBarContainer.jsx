@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { setLoggedIn, setFeatureID, setTests, updateFeatures } from '../../store/appSlice';
+import FeatureContainer from './FeatureContainer';
 
 export default function SideBarContainer() {
     const dispatch = useAppDispatch();
@@ -50,6 +51,7 @@ export default function SideBarContainer() {
     console.log(sidebar)
     return (
         <div>
+            <FeatureContainer />
             {sidebar}
         </div>
     );
