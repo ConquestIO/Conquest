@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { setFeatures, setFeatureModal, setTestModal } from '../../store/appSlice';
+import TestChart from './TestChart';
 
 export default function TestDisplay(){
     const dispatch = useAppDispatch();
@@ -14,7 +15,7 @@ export default function TestDisplay(){
 
     return (
         <div>
-    
+          <TestChart />
         </div>
     );
 

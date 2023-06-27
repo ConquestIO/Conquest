@@ -47,7 +47,6 @@ export default function SideBarContainer() {
             Logout
         </button>,
     ]
-    console.log(sidebar)
     return (
         <div>
             {sidebar}
