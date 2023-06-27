@@ -1,21 +1,14 @@
-import express from 'express';
-import userController from '../controllers/userController.js';
+import express from "express";
+import userController from "../controllers/userController.js";
 
 const userRouter = express.Router();
 
-userRouter.post(
-  '/register',
-  userController.registerUser,
-  userController.loginUser,
-  (req, res, next) => res.sendStatus(201)
-);
+userRouter.post("/register", userController.registerUser, (req, res) => {
+  return res.status(201).json(res.locals.user);
+});
 
-userRouter.post(
-  '/login',
-  userController.loginUser,
-  (req, res, next) => res.sendStatus(200)
-);
-
-userRouter.use('*', (req, res) => res.status(404).send('Page not found'));
+userRouter.post("/login", userController.loginUser, (req, res) => {
+  return res.status(200).json(res.locals.user);
+});
 
 export default userRouter;

@@ -19,6 +19,8 @@ const initialState = {
     },
   ],
   featureID: 'none',
+  featureName: 'No Test Selected',
+  description: "Where are the tests?",
   tests: [
     {
       id: 1,
@@ -77,6 +79,12 @@ const appSlice = createSlice({
     setFeatureID: (state, action) => {
       state.featureID = action.payload;
     },
+    setFeatureName: (state, action) => {
+      state.featureName = action.payload;
+    },
+    setDescription: (state, action) => {
+      state.description = action.payload;
+    },
     setTests: (state, action) => {
       state.tests = action.payload;
     },
@@ -102,6 +110,8 @@ export const {
   setUserID,
   setFeatures,
   setFeatureID,
+  setFeatureName,
+  setDescription,
   setTests,
   setLoggedIn,
   setLoginModal,

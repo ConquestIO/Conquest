@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import Button from '../../components/Button'
-import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { setFeatures, setFeatureModal } from '../../store/appSlice';
-import Select from 'react-select'
+import { useAppDispatch, useAppSelector} from '../../store/hooks';
+import { setFeatures, setFeatureModal, setFeatureName, setDescription } from '../../store/appSlice';
 // export default function FeatureForm() {
 //     const dispatch = useAppDispatch();
 //     const features = useAppSelector((state) => state.app.features);
@@ -27,28 +26,16 @@ import Select from 'react-select'
 
     const FeatureForm = () => {
 
-        const dispatch = useAppDispatch();
-        const [feature, setFeature] = useState('none')
-        const [status, setStatus] = useState('none');
-        const [test, setTest] = useState('none');
-
-        const tests = [
-          { value:'unitTest', label: "Unit Tests" },
-          { value:'integrationTest', label: "Integration Tests" },
-          { value:'functionalTest', label: "Unit Tests" },
-          { value:'e2eTest', label: "E2E Tests" },
-        ]
-
-        const statuses = [
-          { value:'notStarted', label: "Not Started" },
-          { value:'inProgress', label: "In Progress" },
-          { value:'completed', label: "Completed" },
-        ]
+      const dispatch = useAppDispatch();
+      const featureName = useAppSelector((state) => state.app.featureName)
+      const description = useAppSelector((state) => state.app.description)
 
         const handleSubmit = async (e) => {
-          console.log(feature)
+          console.log(featureName)
+          console.log(description)
           e.preventDefault();
           try {
+            document.getElementById("form").reset();
             dispatch(setFeatureModal(closed))
             const res = await fetch('/api/features', {
               method: 'POST',
@@ -56,9 +43,8 @@ import Select from 'react-select'
                 'Content-Type': 'Application/JSON',
               },
               body: JSON.stringify({
-                feature,
-                status,
-                test
+                featureName,
+                description
               }),
             });
             if (res.status === 204) {
@@ -79,7 +65,7 @@ import Select from 'react-select'
             <p className='mb-4 block text-center text-xl font-bold text-gray-700'>
               Add A Feature
             </p>
-            <form onSubmit={handleSubmit}>
+            <form id='form' onSubmit={handleSubmit}>
               <div className='mb-4'>
                 <label
                   className='mb-2 block text-sm font-bold text-gray-700'
@@ -90,15 +76,19 @@ import Select from 'react-select'
                   type='text'
                   placeholder='Feature Name'
                   required
-                  onChange={(e) => setFeature(e.target.value)}
+                  onChange={(e) => dispatch(setFeatureName((e.target.value)))}
                   spellCheck='false'
                 />
               </div>
               <div className='mb-6 bg-blue'>
-                <Select options={statuses} onChange={e => setStatus(e.value)} placeholder='Select A Status' />
-              </div>
-              <div className='mb-6'>
-                <Select options={tests} onChange={e => setTest(e.value)} placeholder='Select A Test' />
+              <input
+                  className=' h-20 focus:shadow-outline w-full appearance-none rounded border bg-white px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none'
+                  type='text'
+                  placeholder='Description'
+                  required
+                  onChange={(e) => dispatch(setDescription((e.target.value)))}
+                  spellCheck='false'
+                />
               </div>
               <div className='flex items-center justify-center'>
                 <Button type='submit' variant='secondary' size='lg'>
