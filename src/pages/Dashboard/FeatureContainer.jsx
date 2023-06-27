@@ -1,5 +1,5 @@
 import Button from '../../components/Button';
-import Modal from '../..//components/Modal';
+import DashboardModal from '../../components/DashboardModal';
 import FeatureForm from './FeatureForm';
 import { useAppDispatch, useAppSelector } from '../..//store/hooks';
 import { setFeatureModal } from '../../store/appSlice';
@@ -14,21 +14,21 @@ const FeatureContainer = () => {
         <ul className='flex gap-3'>
           <li>
             <Button
-              className='mx-0 drop-shadow-sm'
+              className='mx-0 ml-5 drop-shadow-sm'
               onClick={() => dispatch(setFeatureModal(true))}
             >
               Add Feature
             </Button>
           </li>
         </ul>
-        <Modal
+        <DashboardModal
           open={openFeatureModal}
           onClose={() => {
             dispatch(setFeatureModal(false))
           }}
         >
           <FeatureForm/>
-        </Modal>
+        </DashboardModal>
       </div>
     );
   };
