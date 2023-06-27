@@ -12,7 +12,7 @@ export default function SideBarContainer() {
     const navigate = useNavigate();
 
 
-    sidebar = [
+    let sidebar = [
         //add feature button (cant just update state because it will delete so we have to copy state and then add)
         <button
         onClick = {async () => {
@@ -35,7 +35,7 @@ export default function SideBarContainer() {
             }}
             >
             ${el.featureName}
-            </button>,
+            </button>
         }),
         //logout button for sidebar. Clear userId, set logged in to false and reroute to landing page
         <button
