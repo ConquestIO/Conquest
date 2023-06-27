@@ -1,4 +1,4 @@
-import db from '../models/testTrackerModel.js';
+import query from '../models/testTrackerModel.js';
 
 const featuresController = {
   // get full list of features from DB for specific user
@@ -8,11 +8,11 @@ const featuresController = {
     const { userId } = req.user;
 
     try {
-      const query = `SELECT _id AS id, feature_name, description, created_on FROM feature WHERE feature.user_id = $1`;
+      const text = `SELECT _id AS id, feature_name, description, created_on FROM feature WHERE feature.user_id = $1`;
 
       const values = [userId];
 
-      const data = await db.query(query, values);
+      const data = await query(text, values);
 
       // validate data before storage
       if (!data.rows.length) throw new Error;
@@ -38,11 +38,11 @@ const featuresController = {
     // TODO: update DB to allow _id be non-null & remove _id query & 25 from values
 
     try {
-      const query = `INSERT INTO feature(_id, feature_name, description, user_id) VALUES ($1, $2, $3, $4) RETURNING *;`;
+      const text = `INSERT INTO feature(_id, feature_name, description, user_id) VALUES ($1, $2, $3, $4) RETURNING *;`;
 
       const values = [25, featureName, description, userId];
 
-      const newFeature = await db.query(query, values);
+      const newFeature = await query(text, values);
 
       // validate wehtehr new Feature is successfully added to DB
       if (!newFeature.rows[0]) throw new Error;

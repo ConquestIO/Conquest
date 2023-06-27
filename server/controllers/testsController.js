@@ -1,4 +1,4 @@
-// const db = require("../models/testTrackerModel");
+import query from '../models/testTrackerModel.js';
 
 const testsController = {
   getTestsList: async (req, res, next) => {
