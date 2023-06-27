@@ -3,7 +3,7 @@ import pkg from "pg";
 const { Pool } = pkg;
 
 const PG_URI =
-  "postgres://ohrndtor:fguMG3DeFLWz5mdIsTspVdwR7Hy9_N3O@rajje.db.elephantsql.com/ohrndtor";
+  "postgres://gfnkxmtf:Is08Be6qFLqqe3_vQ-K8KTaqIMV07Ee2@rajje.db.elephantsql.com/gfnkxmtf";
 
 // create a new pool here using the connection string above
 const pool = new Pool({
@@ -21,7 +21,7 @@ CREATE TABLE users (
 );
 
 CREATE TABLE feature (
-	"_id" varchar primary key,
+	"_id" serial primary key,
 	"user_id" bigint references users("_id"),
 	"feature_name" varchar,
 	"description" varchar,
@@ -29,8 +29,8 @@ CREATE TABLE feature (
 );
 
 CREATE TABLE test (
-	"_id" varchar primary key,
-	"feature_id" varchar references feature("_id"),
+	"_id" serial primary key,
+	"feature_id" bigint references feature("_id"),
 	"test_name" varchar,
 	"description" varchar,
 	"status" varchar,
