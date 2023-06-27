@@ -10,11 +10,11 @@ const FeatureContainer = () => {
   
   
     return (
-      <div className = 'justify-center'>
+      <div className = 'm-auto mr-4 justify-center mt-4 mb-8'>
         <ul className='flex gap-3'>
           <li>
-            <Button
-              className='mx-0 ml-5 drop-shadow-sm'
+            <Button 
+              className='mx-0 drop-shadow-sm rounded-md bg-sky-600 w-40 h-10 text-white'
               onClick={() => dispatch(setFeatureModal(true))}
             >
               Add Feature
