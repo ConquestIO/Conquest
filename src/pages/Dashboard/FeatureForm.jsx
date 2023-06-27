@@ -2,7 +2,7 @@ import React from 'react';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { setFeature } from '../../store/appSlice';
 
-export default function FeatureModal() {
+export default function FeatureForm() {
     const dispatch = useAppDispatch();
     const features = useAppSelector((state) => state.app.features);
 
