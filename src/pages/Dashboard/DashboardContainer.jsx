@@ -13,7 +13,7 @@ export default function DashboardContainer(){
     //on render, fetch all features associated with user and update state
     useEffect(() => {
         (async () => {
-            await fetch(`/api/${userID}/features`)
+            await fetch(`/api/features`)
             .then((res) => dispatch(setFeatures(res)))
         })
     })

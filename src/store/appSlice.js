@@ -19,7 +19,46 @@ const initialState = {
     },
   ],
   featureID: 'none',
-  tests: {},
+  featureName: 'No Test Selected',
+  description: "Where are the tests?",
+  tests: [
+    {
+      id: 1,
+      testName: 'Unit Test 1',
+      description: 'testing the thing',
+      status: 'completed',
+      category: 'unit',
+      featureId: 1,
+      createdOn: '2023',
+    },
+    {
+      id: 2,
+      testName: 'Functional Test 1',
+      description: 'testing the thing',
+      status: 'completed',
+      category: 'functional',
+      featureId: 1,
+      createdOn: '2023',
+    },
+    {
+      id: 3,
+      testName: 'E2E Test 1',
+      description: 'testing the thing',
+      status: 'completed',
+      category: 'e2e',
+      featureId: 1,
+      createdOn: '2023',
+    },
+    {
+      id: 4,
+      testName: 'Unit Test 2',
+      description: 'testing the thing',
+      status: 'completed',
+      category: 'unit',
+      featureId: 1,
+      createdOn: '2023',
+    },
+  ],
   loggedIn: false,
   loginModal: closed,
   signupModal: closed,
@@ -39,6 +78,12 @@ const appSlice = createSlice({
     },
     setFeatureID: (state, action) => {
       state.featureID = action.payload;
+    },
+    setFeatureName: (state, action) => {
+      state.featureName = action.payload;
+    },
+    setDescription: (state, action) => {
+      state.description = action.payload;
     },
     setTests: (state, action) => {
       state.tests = action.payload;
@@ -65,6 +110,8 @@ export const {
   setUserID,
   setFeatures,
   setFeatureID,
+  setFeatureName,
+  setDescription,
   setTests,
   setLoggedIn,
   setLoginModal,
