@@ -7,6 +7,7 @@ import Select from 'react-select';
 const TestForm = () => {
   const dispatch = useAppDispatch();
   const [testName, setTestName] = useState('none');
+  const [description, setDescription] = useState('none');
   const [status, setStatus] = useState('none');
   const [category, setCategory] = useState('none');
   const featureID = useAppSelector((state) => state.app.featureID.id)
@@ -35,6 +36,7 @@ const TestForm = () => {
         },
         body: JSON.stringify({
           testName,
+          description,
           status,
           category,
           featureID
@@ -66,6 +68,17 @@ const TestForm = () => {
             placeholder='Test Name'
             required
             onChange={(e) => setTestName(e.target.value)}
+            spellCheck='false'
+          />
+        </div>
+        <div className='mb-4'>
+          <label className='mb-2 block text-sm font-bold text-gray-700'></label>
+          <input
+            className='focus:shadow-outline w-full appearance-none rounded border bg-white px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none'
+            type='text'
+            placeholder='Description'
+            required
+            onChange={(e) => setDescription(e.target.value)}
             spellCheck='false'
           />
         </div>
