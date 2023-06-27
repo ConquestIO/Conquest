@@ -1,4 +1,4 @@
-import express from 'express'
+import express from 'express';
 import path from 'path';
 const app = express();
 
@@ -9,8 +9,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 //request to router
-app.use('/test', (req,res) => res.send('IT WORKS'));
-
+app.use('/test', (req, res) => res.send('IT WORKS'));
 
 // if running from production, serve bundled files
 if (process.env.NODE_ENV === 'production') {
@@ -21,7 +20,9 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 //catch-all route handler for any requests
-app.use((req, res) => res.status(404).send('This page does not exist'));
+app.use('*', (req, res) => {
+  res.status(404).send('Not Found');
+});
 
 //express error handler
 app.use((err, req, res, next) => {
@@ -35,10 +36,6 @@ app.use((err, req, res, next) => {
   return res.status(errorObj.status).json(errorObj.message);
 });
 
-// start server
-
-const server = app.listen(PORT, () => {
+export default app.listen(PORT, () => {
   console.log(`Server listening on port: ${PORT}...`);
 });
-
-export default server;
