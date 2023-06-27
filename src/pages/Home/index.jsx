@@ -1,6 +1,7 @@
 import Navbar from './Navbar';
 import Intro from './Intro';
 import Summary from './Summary';
+import Teams from './Teams';
 
 const Home = () => {
   return (
@@ -8,6 +9,7 @@ const Home = () => {
       <Navbar />
       <Intro />
       <Summary />
+      <Teams />
     </>
   );
 };
