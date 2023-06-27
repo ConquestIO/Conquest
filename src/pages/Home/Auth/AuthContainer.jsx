@@ -1,36 +1,15 @@
-import { useState, useContext, ChangeEvent } from 'react';
 import Button from '../../../components/Button';
 import Modal from '../../../components/Modal';
 import LoginForm from './LoginForm';
 import SignupForm from './SignupForm';
-// import { UserContext } from '../../../contexts/userContexts';
-import { useNavigate } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../../store/hooks';
+import { setLoginModal, setSignupModal } from '../../../store/appSlice';
 
 const AuthContainer = () => {
-  const [openLoginModal, setOpenLoginModal] = useState(false);
-  const [openSignupModal, setOpenSignupModal] = useState(false);
-  // const { loggedIn, setLoggedIn } = useContext(UserContext);
-  // const navigate = useNavigate();
-  const handleLogOut = () => {
-    console.log(' handleLogOut invoked!');
-    // e.preventDefault();
+  const dispatch = useAppDispatch();
+  const openLoginModal = useAppSelector((state) => state.app.loginModal);
+  const openSignupModal = useAppSelector((state) => state.app.signupModal);
 
-    fetch('/user/logout', {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'Application/JSON',
-      },
-    })
-      .then((res) => {
-        if (res.status === 204) {
-          setLoggedIn(false);
-          window.location.reload();
-        } else {
-          alert('Logout unsuccessful. Please retry.');
-        }
-      })
-      .catch((err) => console.log('Logout ERROR: ', err));
-  };
 
   return (
     <div>
@@ -38,7 +17,7 @@ const AuthContainer = () => {
         <li>
           <Button
             className='mx-0 drop-shadow-sm'
-            onClick={() => setOpenLoginModal(true)}
+            onClick={() => dispatch(setLoginModal(true))}
           >
             Sign In
           </Button>
@@ -48,7 +27,7 @@ const AuthContainer = () => {
             <Button
               variant='secondary'
               className='mx-0 bg-secondary drop-shadow-sm'
-              onClick={() => setOpenSignupModal(true)}
+              onClick={() => dispatch(setSignupModal(true))}
             >
               Sign Up
             </Button>
@@ -57,8 +36,7 @@ const AuthContainer = () => {
       <Modal
         open={openLoginModal}
         onClose={() => {
-          console.log('%c It closes', 'color: red');
-          setOpenLoginModal(false);
+          dispatch(setLoginModal(false))
         }}
       >
         <LoginForm />
@@ -66,8 +44,7 @@ const AuthContainer = () => {
       <Modal
         open={openSignupModal}
         onClose={() => {
-          console.log('%c It closes', 'color: red');
-          setOpenSignupModal(false);
+          dispatch(setSignupModal(false))
         }}
       >
         <SignupForm />
