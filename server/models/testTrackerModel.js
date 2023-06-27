@@ -1,4 +1,6 @@
-const { Pool } = require("pg");
+import pkg from "pg";
+
+const { Pool } = pkg;
 
 const PG_URI =
   "postgres://ohrndtor:fguMG3DeFLWz5mdIsTspVdwR7Hy9_N3O@rajje.db.elephantsql.com/ohrndtor";
@@ -38,9 +40,16 @@ CREATE TABLE test (
 
 */
 
-module.exports = {
-  query: (text, params, callback) => {
-    console.log("executed query", text);
-    return pool.query(text, params, callback);
-  },
+const query = (text, params, callback) => {
+  console.log("executed query", text);
+  return pool.query(text, params, callback);
 };
+
+export default query;
+
+// module.exports = {
+//   query: (text, params, callback) => {
+//     console.log("executed query", text);
+//     return pool.query(text, params, callback);
+//   },
+// };
