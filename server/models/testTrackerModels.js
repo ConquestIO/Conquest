@@ -1,0 +1,49 @@
+const { Pool } = require("pg");
+
+const PG_URI =
+  "postgres://ohrndtor:fguMG3DeFLWz5mdIsTspVdwR7Hy9_N3O@rajje.db.elephantsql.com/ohrndtor";
+
+// create a new pool here using the connection string above
+const pool = new Pool({
+  connectionString: PG_URI,
+});
+
+/*
+Created the schemas on elephantSQL browser
+
+CREATE TABLE users (
+	"_id" serial primary key,
+	"username" varchar,
+	"password" varchar,
+	"created_on" timestamp default CURRENT_TIMESTAMP not null
+);
+
+CREATE TABLE feature (
+	"_id" varchar primary key,
+	"user_id" bigint references users("_id"),
+	"feature_name" varchar,
+	"description" varchar,
+	"created_on" timestamp default CURRENT_TIMESTAMP not null
+);
+
+CREATE TABLE test (
+	"_id" varchar primary key,
+	"feature_id" varchar references feature("_id"),
+	"test_name" varchar,
+	"description" varchar,
+	"status" varchar,
+	"category" varchar,
+	"created_on" timestamp default CURRENT_TIMESTAMP not null
+);
+
+*/
+
+// We export an object that contains a property called query,
+// which is a function that returns the invocation of pool.query() after logging the query
+// This will be required in the controllers to be the access point to the database
+module.exports = {
+  query: (text, params, callback) => {
+    console.log("executed query", text);
+    return pool.query(text, params, callback);
+  },
+};
