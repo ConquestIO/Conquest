@@ -8,7 +8,7 @@ const featuresController = {
     const { userId } = req.user;
 
     try {
-      const text = `SELECT _id AS id, feature_name, description, created_on FROM feature WHERE feature.user_id = $1`;
+      const text = `SELECT _id AS id, feature_name, description, created_on FROM feature WHERE feature.user_id = $1;`;
 
       const values = [userId];
 
