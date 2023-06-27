@@ -1,6 +1,7 @@
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { useState } from 'react';
-import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { useAppSelector } from '../../store/hooks';
+import Select from 'react-select';
 
 const normalizedTests = (tests) => {
   const retArr = [];
@@ -30,17 +31,18 @@ const move = (source, destination, droppableSource, droppableDestination) => {
   const result = [];
   result[droppableSource.droppableId] = sourceClone;
   result[droppableDestination.droppableId] = destClone;
-  if (droppableDestination.droppableId == 0) updateTest({ ...removed }, 'unit');
+  if (droppableDestination.droppableId == 0)
+    updateTestCategory({ ...removed }, 'unit');
   else if (droppableDestination.droppableId == 1)
-    updateTest({ ...removed }, 'integration');
+    updateTestCategory({ ...removed }, 'integration');
   else if (droppableDestination.droppableId == 2)
-    updateTest({ ...removed }, 'e2e');
+    updateTestCategory({ ...removed }, 'e2e');
   else if (droppableDestination.droppableId == 3)
-    updateTest({ ...removed }, 'functional');
+    updateTestCategory({ ...removed }, 'functional');
   return result;
 };
 
-const updateTest = async (test, newCategory) => {
+const updateTestCategory = async (test, newCategory) => {
   test.category = newCategory;
   try {
     await fetch('/api/tests', {
@@ -51,7 +53,22 @@ const updateTest = async (test, newCategory) => {
       body: JSON.stringify(test),
     });
   } catch (err) {
-    console.log('Log in: ERROR: ', err);
+    console.log('Update Test Category: ERROR: ', err);
+  }
+};
+
+const updateTestStatus = async (test, newStatus) => {
+  test.status = newStatus;
+  try {
+    await fetch('/api/tests', {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'Application/JSON',
+      },
+      body: JSON.stringify(test),
+    });
+  } catch (err) {
+    console.log('Update Test Status: ERROR: ', err);
   }
 };
 
@@ -62,6 +79,7 @@ const getListStyle = (isDraggingOver) => ({
   display: 'flex',
   flexDirection: 'column',
   gap: '10px',
+  height: '100%',
 });
 const reorder = (list, startIndex, endIndex) => {
   const result = list;
@@ -98,29 +116,58 @@ const TestChart = () => {
     }
   }
 
+  const updateStatus = (test, newStatus, location) => {
+    updateTestStatus({ ...test }, newStatus);
+    test.status = newStatus;
+    const newState = [...state];
+
+    for (let i = 0; i < newState[location].length; i++) {
+      if (newState[location][i].id == test.id) {
+        newState[location][i] = test;
+        break;
+      }
+    }
+    setState(newState);
+  };
+
   return (
     <div className='flex'>
       <DragDropContext onDragEnd={onDragEnd}>
-        <DroppableCard
-          items={state[0]}
-          droppableId={'0'}
-          header={'Unit Testing'}
-        />
-        <DroppableCard
-          items={state[1]}
-          droppableId={'1'}
-          header={'Integration Testing'}
-        />
-        <DroppableCard
-          items={state[2]}
-          droppableId={'2'}
-          header={'End-to-End Testing'}
-        />
-        <DroppableCard
-          items={state[3]}
-          droppableId={'3'}
-          header={'Functional Testing'}
-        />
+        <div className='flex flex-col items-center gap-3'>
+          <h1 className='font-bold whitespace-nowrap'>Unit Testing</h1>
+          <DroppableCard
+            items={state[0]}
+            droppableId={'0'}
+            updateStatus={updateStatus}
+          />
+        </div>
+
+        <div className='flex flex-col items-center gap-3'>
+          <h1 className='font-bold whitespace-nowrap'>Integration Testing</h1>
+          <DroppableCard
+            items={state[1]}
+            droppableId={'1'}
+            updateStatus={updateStatus}
+            className='h-full'
+          />
+        </div>
+        <div className='flex flex-col items-center gap-3'>
+          <h1 className='font-bold '>End-to-End Testing</h1>
+          <DroppableCard
+            items={state[2]}
+            droppableId={'2'}
+            updateStatus={updateStatus}
+          />
+        </div>
+        <div className='flex flex-col items-center gap-3'>
+          <h1 className='font-bold'>Functional Testing</h1>
+
+          <DroppableCard
+            items={state[3]}
+            droppableId={'3'}
+            updateStatus={updateStatus}
+          />
+        </div>
       </DragDropContext>
     </div>
   );
@@ -138,7 +185,13 @@ const DroppableCard = (props) => {
         >
           <h3 className='self-center whitespace-nowrap'>{props.header}</h3>
           {props.items.map((item, index) => (
-            <DraggableCard item={item} index={index} key={index}/>
+            <DraggableCard
+              item={item}
+              index={index}
+              key={index}
+              updateStatus={props.updateStatus}
+              droppableId={props.droppableId}
+            />
           ))}
           {provided.placeholder}
         </div>
@@ -148,6 +201,17 @@ const DroppableCard = (props) => {
 };
 
 const DraggableCard = (props) => {
+  const statuses = [
+    { value: 'notStarted', label: 'Not Started' },
+    { value: 'inProgress', label: 'In Progress' },
+    { value: 'completed', label: 'Completed' },
+  ];
+  const statusIndex =
+    props.item.status === 'completed'
+      ? 2
+      : props.item.status === 'inProgress'
+      ? 1
+      : 0;
   return (
     <Draggable draggableId={`${props.item.id}`} index={props.index}>
       {(provided, snapshot) => (
@@ -159,7 +223,22 @@ const DraggableCard = (props) => {
         >
           <div className='text-sm font-semibold'>{props.item.testName}</div>
           <div className='text-sm'>Description: {props.item.description}</div>
-          <div className='text-sm'>Status: {props.item.status}</div>
+          <div className='text-sm flex items-center gap-2'>
+            Status:{' '}
+            <button>
+              <Select
+                options={statuses}
+                onChange={(e) =>
+                  props.updateStatus(
+                    { ...props.item },
+                    e.value,
+                    props.droppableId
+                  )
+                }
+                defaultValue={statuses[statusIndex]}
+              />
+            </button>
+          </div>
         </div>
       )}
     </Draggable>
