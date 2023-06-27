@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Button from '../../components/Button'
-import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { useAppDispatch } from '../../store/hooks';
 import { setFeatures, setFeatureModal } from '../../store/appSlice';
 import Select from 'react-select'
 
