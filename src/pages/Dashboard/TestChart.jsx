@@ -75,7 +75,7 @@ const updateTestStatus = async (test, newStatus) => {
 const getListStyle = (isDraggingOver) => ({
   background: isDraggingOver ? 'lightblue' : 'rgb(235, 236, 240)',
   padding: 8,
-  width: 250,
+  width: '100%',
   display: 'flex',
   flexDirection: 'column',
   gap: '10px',
@@ -131,18 +131,19 @@ const TestChart = () => {
   };
 
   return (
-    <div className='flex'>
-      <DragDropContext onDragEnd={onDragEnd}>
-        <div className='flex flex-col items-center gap-3'>
+    <div className='flex h-5/6 w-full'>
+      <DragDropContext onDragEnd={onDragEnd} style={{}}>
+        <div className='flex flex-col items-center gap-3 w-[25%] min-w-[196px]'>
           <h1 className='font-bold whitespace-nowrap'>Unit Testing</h1>
           <DroppableCard
             items={state[0]}
             droppableId={'0'}
             updateStatus={updateStatus}
+            rounded='rounded-l-lg'
           />
         </div>
 
-        <div className='flex flex-col items-center gap-3'>
+        <div className='flex flex-col items-center gap-3 w-[25%] min-w-[196px]'>
           <h1 className='font-bold whitespace-nowrap'>Integration Testing</h1>
           <DroppableCard
             items={state[1]}
@@ -151,21 +152,21 @@ const TestChart = () => {
             className='h-full'
           />
         </div>
-        <div className='flex flex-col items-center gap-3'>
-          <h1 className='font-bold '>End-to-End Testing</h1>
+        <div className='flex flex-col items-center gap-3 w-[25%] min-w-[196px]'>
+          <h1 className='font-bold whitespace-nowrap'>End-to-End Testing</h1>
           <DroppableCard
             items={state[2]}
             droppableId={'2'}
             updateStatus={updateStatus}
           />
         </div>
-        <div className='flex flex-col items-center gap-3'>
-          <h1 className='font-bold'>Functional Testing</h1>
-
+        <div className='flex flex-col items-center gap-3 w-[25%] min-w-[196px]'>
+          <h1 className='font-bold whitespace-nowrap'>Functional Testing</h1>
           <DroppableCard
             items={state[3]}
             droppableId={'3'}
             updateStatus={updateStatus}
+            rounded='rounded-r-lg'
           />
         </div>
       </DragDropContext>
@@ -178,7 +179,7 @@ const DroppableCard = (props) => {
     <Droppable droppableId={props.droppableId} key={props.droppableId}>
       {(provided, snapshot) => (
         <div
-          className='border-r border-2'
+          className={`border-r border-2 ${props.rounded}`}
           ref={provided.innerRef}
           style={getListStyle(snapshot.isDraggingOver)}
           {...provided.droppableProps}
