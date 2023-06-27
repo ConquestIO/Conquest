@@ -1,67 +1,49 @@
-import { FormEvent, useContext } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AuthForm from './AuthForm';
-// import { UserContext } from '../../../contexts/userContexts';
 import { v4 as uuidv4 } from 'uuid';
+import { setLoggedIn, setUserID } from '../../../store/appSlice';
+import { useAppDispatch } from '../../../store/hooks';
 
 const Signup = () => {
-  // const { setLoggedIn, username, password } = useContext(UserContext);
-
-  // const navigate = useNavigate();
+  const [username, setUsername] = useState();
+  const [password, setPassword] = useState();
+  const navigate = useNavigate();
   const uniqueId = uuidv4();
+  const dispatch = useAppDispatch();
 
-  function addApp() {
-    fetch('/apps', {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json',
-      },
-    })
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error();
-        }
-      })
-      .catch((err) => console.log('Add app ERROR: ', err));
-  }
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // if (username.length < 3) {
-    //   alert('Username length must be at least 3!');
-    //   return;
-    // }
-    // if (password.length < 6) {
-    //   alert('Password length must be at least 6!');
-    //   return;
-    // }
-
-    const body = {
-      // username,
-      // password,
-    };
-
-    fetch('/user/register', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'Application/JSON',
-      },
-      body: JSON.stringify({
-        // username,
-        // password,
-      }),
-    })
-      .then((res) => {
-        if (res.status === 201) {
-          setLoggedIn(true);
-          addApp();
-          navigate('/dashboard');
-        } else {
-          alert('Registration unsuccessful. Please retry.');
-        }
-      })
-      .catch((err) => console.log('Sign up ERROR: ', err));
+    if (username.length < 3) {
+      alert('Username length must be at least 3!');
+      return;
+    }
+    if (password.length < 6) {
+      alert('Password length must be at least 6!');
+      return;
+    }
+    try {
+      const res = await fetch('/user/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'Application/JSON',
+        },
+        body: JSON.stringify({
+          username,
+          password,
+        }),
+      });
+      if (res.status === 201) {
+        const data = await res.json();
+        dispatch(setLoggedIn(true));
+        dispatch(setUserID(data.userId));
+        navigate('/dashboard');
+      } else {
+        alert('Registration unsuccessful. Please retry.');
+      }
+    } catch (err) {
+      console.log('Sign up ERROR: ', err);
+    }
   };
 
   return (
@@ -70,7 +52,8 @@ const Signup = () => {
       passwordInputId={`pwd${uniqueId}`}
       text={'Sign Up'}
       handleSubmit={handleSubmit}
-      // value={}
+      setUsername={setUsername}
+      setPassword={setPassword}
     />
   );
 };

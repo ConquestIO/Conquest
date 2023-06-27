@@ -2,15 +2,15 @@ import Button from '../../../components/Button';
 // import { UserContext } from '../../../contexts/userContexts';
 import { useContext } from 'react';
 
-
 const AuthForm = ({
+  setUsername,
+  setPassword,
   usernameInputId,
   passwordInputId,
   text,
   handleSubmit,
   value,
 }) => {
-  // const { setPassword, setUsername } = useContext(UserContext);
 
   return (
     <>
