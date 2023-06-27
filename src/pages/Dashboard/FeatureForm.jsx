@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Button from '../../components/Button'
-import { useAppDispatch} from '../../store/hooks';
-import { setFeatures, setFeatureModal } from '../../store/appSlice';
+import { useAppDispatch, useAppSelector} from '../../store/hooks';
+import { setFeatures, setFeatureModal, setFeatureName, setDescription } from '../../store/appSlice';
 // export default function FeatureForm() {
 //     const dispatch = useAppDispatch();
 //     const features = useAppSelector((state) => state.app.features);
@@ -26,12 +26,13 @@ import { setFeatures, setFeatureModal } from '../../store/appSlice';
 
     const FeatureForm = () => {
 
-        const dispatch = useAppDispatch();
-        const [feature, setFeature] = useState('none')
-        const [description, setDescription] = useState('none');
+      const dispatch = useAppDispatch();
+      const featureName = useAppSelector((state) => state.app.featureName)
+      const description = useAppSelector((state) => state.app.description)
 
         const handleSubmit = async (e) => {
-          console.log(feature)
+          console.log(featureName)
+          console.log(description)
           e.preventDefault();
           try {
             document.getElementById("form").reset();
@@ -42,7 +43,7 @@ import { setFeatures, setFeatureModal } from '../../store/appSlice';
                 'Content-Type': 'Application/JSON',
               },
               body: JSON.stringify({
-                feature,
+                featureName,
                 description
               }),
             });
@@ -75,7 +76,7 @@ import { setFeatures, setFeatureModal } from '../../store/appSlice';
                   type='text'
                   placeholder='Feature Name'
                   required
-                  onChange={(e) => setFeature(e.target.value)}
+                  onChange={(e) => dispatch(setFeatureName((e.target.value)))}
                   spellCheck='false'
                 />
               </div>
@@ -85,7 +86,7 @@ import { setFeatures, setFeatureModal } from '../../store/appSlice';
                   type='text'
                   placeholder='Description'
                   required
-                  onChange={(e) => setDescription(e.target.value)}
+                  onChange={(e) => dispatch(setDescription((e.target.value)))}
                   spellCheck='false'
                 />
               </div>
