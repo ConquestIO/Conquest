@@ -1,9 +1,8 @@
-import Button from '../../../components/Button';
-import Modal from '../../../components/Modal';
-import LoginForm from './LoginForm';
+import Button from '../../components/Button';
+import Modal from '../..//components/Modal';
 import FeatureForm from './FeatureForm';
-import { useAppDispatch, useAppSelector } from '../../../store/hooks';
-import { setLoginModal, setSignupModal } from '../../../store/appSlice';
+import { useAppDispatch, useAppSelector } from '../..//store/hooks';
+import { setFeatureModal } from '../../store/appSlice';
 
 const FeatureContainer = () => {
     const dispatch = useAppDispatch();
@@ -16,7 +15,7 @@ const FeatureContainer = () => {
           <li>
             <Button
               className='mx-0 drop-shadow-sm'
-              onClick={() => dispatch(setLoginModal(true))}
+              onClick={() => dispatch(setFeatureModal(true))}
             >
               Add Feature
             </Button>
@@ -25,7 +24,7 @@ const FeatureContainer = () => {
         <Modal
           open={openFeatureModal}
           onClose={() => {
-            dispatch(setLoginModal(false))
+            dispatch(setFeatureModal(false))
           }}
         >
           <FeatureForm/>
