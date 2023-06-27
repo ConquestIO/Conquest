@@ -30,7 +30,7 @@ import Select from 'react-select'
           e.preventDefault();
           try {
             dispatch(setFeatureModal(closed))
-            const res = await fetch('/test', {
+            const res = await fetch('api/tests', {
               method: 'POST',
               headers: {
                 'Content-Type': 'Application/JSON',
