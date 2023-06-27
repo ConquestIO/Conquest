@@ -42,8 +42,8 @@ const featuresController = {
 
       const newFeature = await query(text, values);
 
-      // validate wehtehr new Feature is successfully added to DB
-      if (!newFeature.rows[0]) throw new Error;
+      // validate whether new Feature is successfully added to DB
+      if (!newFeature.length) throw new Error;
       return next();
     } catch (err) {
       return next({
