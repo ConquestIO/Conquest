@@ -11,6 +11,10 @@ export default {
         '3xl': '2000px',
         wrap: '1461px',
       },
+      backgroundImage: {
+        'bg1': "url('./assets/bg1.jpg')",
+        'bg2': "url('./assets/bg2.jpg')"
+      }
     },
   },
   plugins: [],
