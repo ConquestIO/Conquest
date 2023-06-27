@@ -1,3 +1,5 @@
+const db = require("../models/testTrackerModel");
+
 const testsController = {
   getTestsList: async(req, res, next) => {
     console.log('<--testsController - getTestsList is invoked-->');
