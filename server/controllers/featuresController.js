@@ -35,12 +35,10 @@ const featuresController = {
     const { featureName, description } = req.body;
     const { userId } = req.user;
 
-    // TODO: update DB to allow _id be non-null & remove _id query & 25 from values
-
     try {
-      const text = `INSERT INTO feature(_id, feature_name, description, user_id) VALUES ($1, $2, $3, $4) RETURNING *;`;
+      const text = `INSERT INTO feature(feature_name, description, user_id) VALUES ($1, $2, $3) RETURNING *;`;
 
-      const values = [25, featureName, description, userId];
+      const values = [featureName, description, userId];
 
       const newFeature = await query(text, values);
 
