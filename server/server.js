@@ -17,7 +17,7 @@ app.use(cors());
 //request to router
 // app.use('/test', (req,res) => res.send('IT WORKS'));
 app.use("/user", userRouter);
-app.use("/api", apiRouter);
+app.use("/api", authenticateController.authenticateUser, apiRouter);
 
 // if running from production, serve bundled files
 if (process.env.NODE_ENV === "production") {

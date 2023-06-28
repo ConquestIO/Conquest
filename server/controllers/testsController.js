@@ -2,15 +2,16 @@ import query from "../models/testTrackerModel.js";
 const testsController = {
   getTestsList: async (req, res, next) => {
     console.log("<--testsController - getTestsList is invoked-->");
-    const { feature_id } = req.params;
+    const { featureId } = req.params;
     // make a db query based on feauture id
     try {
       const text = `SELECT * FROM test WHERE feature_id = $1`;
-      const values = [feature_id];
+
+      const values = [featureId];
       const data = await query(text, values);
       // validate data
       if (!data.rows.length) throw new Error();
-      res.locals.testList = await data.rows;
+      res.locals.testList = data.rows;
       return next();
     } catch (err) {
       return next({
@@ -21,19 +22,18 @@ const testsController = {
     }
   },
 
-  // TODO: Keep getting error
   createTest: async (req, res, next) => {
     console.log("<--testsController - createTest is invoked-->");
 
-    const { feature_id, testName, description, status, category } = req.body;
+    const { featureId, testName, description, status, category } = req.body;
 
     try {
       const text = `INSERT INTO test(feature_id, test_name, description, status, category) VALUES ($1, $2, $3, $4, $5) RETURNING *`;
 
-      const values = [feature_id, testName, description, status, category];
+      const values = [featureId, testName, description, status, category];
 
       const newTest = await query(text, values);
-      console.log("newTest: ", newTest);
+      req.params.featureId = featureId;
 
       // validate whether new Feature is successfully added to DB
       if (!newTest.rows.length) throw new Error();
@@ -47,7 +47,6 @@ const testsController = {
     }
   },
 
-  // TODO: query works but getting error
   updateTest: async (req, res, next) => {
     console.log("<--testsController - updateTest is invoked-->");
     const { id, status, category, featureId } = req.body;
@@ -58,10 +57,7 @@ const testsController = {
       const values = [id, status, category, featureId];
 
       const updatedTest = await query(text, values);
-      console.log("updated Test: ", updatedTest);
 
-      // validate whether new Feature is successfully added to DB
-      if (!updatedTest.rows.length) throw new Error();
       return next();
     } catch (err) {
       return next({

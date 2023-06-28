@@ -7,21 +7,14 @@ testsRouter.get(
   "/:feature_id",
   testsController.getTestsList,
   (req, res, next) => {
-    //console.log('made it to test get Router');
-    return res.status(200).json(res.locals.testsList);
+    return res.status(200).json(res.locals.testList);
   }
 );
 
-// TODO: is the endpoint correct? should it just be /? /createTest?
-testsRouter.post(
-  "/",
-  testsController.createTest,
-  (req, res, next) => {
-    return res.sendStatus(201);
-  }
-);
+testsRouter.post("/", testsController.createTest, testsController.getTestsList, (req, res, next) => {
+  return res.status(201).json(res.locals.testList);
+});
 
-// TODO: is the endpoint correct? should it just be /? /updateTest?
 testsRouter.patch("/", testsController.updateTest, (req, res, next) => {
   return res.sendStatus(200);
 });
