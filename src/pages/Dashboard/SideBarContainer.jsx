@@ -13,7 +13,7 @@ export default function SideBarContainer() {
     const navigate = useNavigate();
 
     let sidebar = [
-        //Render a button for each created feature (may have to switch to map)
+        //Render a button for each created feature
         ...features.map((el) => {
             return (<div className='justify-items-center' key={el.id}>
                 <button className = ' bg-sky-600 text-white w-40 h-10 rounded-md mt-5'
@@ -21,7 +21,6 @@ export default function SideBarContainer() {
             onClick = {async () => {
                 //update state to be the current element
                 dispatch(setFeatureID(el));
-                console.log(el)
                 //fetch all tests associated with the feature for the given user
                 const res = await fetch(`/api/tests/${el.id}`)
                 const data = await res.json()
