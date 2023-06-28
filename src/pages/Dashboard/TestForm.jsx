@@ -10,13 +10,13 @@ const TestForm = () => {
   const [description, setDescription] = useState('none');
   const [status, setStatus] = useState('none');
   const [category, setCategory] = useState('none');
-  const featureID = useAppSelector((state) => state.app.featureID.id)
+  const featureId = useAppSelector((state) => state.app.featureID.id)
 
   const tests = [
-    { value: 'unitTest', label: 'Unit Test' },
-    { value: 'integrationTest', label: 'Integration Test' },
-    { value: 'functionalTest', label: 'Functional Test' },
-    { value: 'e2eTest', label: 'E2E Test' },
+    { value: 'unit', label: 'Unit Test' },
+    { value: 'integration', label: 'Integration Test' },
+    { value: 'functional', label: 'Functional Test' },
+    { value: 'e2e', label: 'E2E Test' },
   ];
 
   const statuses = [
@@ -39,13 +39,13 @@ const TestForm = () => {
           description,
           status,
           category,
-          featureID
+          featureId
         }),
       });
       if (res.status === 201) {
-        await res.json();
+        const data = await res.json();
         //need to update redux state to store new feature list when done
-        dispatch(setTests(res));
+        dispatch(setTests(data));
       } else {
         alert('Failed to add new test');
       }

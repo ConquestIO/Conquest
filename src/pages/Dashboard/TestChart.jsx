@@ -1,5 +1,5 @@
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useAppSelector } from '../../store/hooks';
 import Select from 'react-select';
 
@@ -17,7 +17,7 @@ const normalizedTests = (tests) => {
     else if (el.category === 'e2e') e2eTests.push(el);
   });
 
-  retArr.push(unitTests, e2eTests, integrationTests, functionalTests);
+  retArr.push(unitTests, integrationTests, e2eTests, functionalTests);
 
   return retArr;
 };
@@ -92,7 +92,9 @@ const reorder = (list, startIndex, endIndex) => {
 const TestChart = () => {
   const tests = useAppSelector((state) => state.app.tests);
   const [state, setState] = useState(normalizedTests(tests));
-
+  useEffect(() => {
+    setState(normalizedTests(tests));
+  }, [tests]);
   function onDragEnd(result) {
     const { source, destination } = result;
 
@@ -222,7 +224,7 @@ const DraggableCard = (props) => {
           {...provided.draggableProps}
           {...provided.dragHandleProps}
         >
-          <div className='text-sm font-semibold'>{props.item.testName}</div>
+          <div className='text-sm font-semibold'>{props.item.test_name}</div>
           <div className='text-sm'>Description: {props.item.description}</div>
           <div className='text-sm flex items-center gap-2'>
             Status:{' '}
