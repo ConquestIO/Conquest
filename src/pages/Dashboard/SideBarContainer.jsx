@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { setLoggedIn, setFeatureID, setTests, updateFeatures } from '../../store/appSlice';
+import { setLoggedIn, setFeatureID, setTests, setUserID } from '../../store/appSlice';
 import FeatureContainer from './FeatureContainer';
 
 export default function SideBarContainer() {
@@ -35,7 +35,7 @@ export default function SideBarContainer() {
         <button className= ' bg-sky-600 w-40 h-10 text-white mt-60 text-base rounded-md'
         key={'button'}
         onClick={async () => {
-                dispatch(userID('none'))
+                dispatch(setUserID('none'))
                 dispatch(setLoggedIn(false));
                 navigate('/');
         }}
