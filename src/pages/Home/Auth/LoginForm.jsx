@@ -25,7 +25,7 @@ const Login = () => {
           password,
         }),
       });
-      if (res.status === 204) {
+      if (res.status === 200) {
         const data = await res.json();
         dispatch(setLoggedIn(true));
         dispatch(setUserID(data.userId));
