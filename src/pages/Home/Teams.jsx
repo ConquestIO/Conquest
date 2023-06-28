@@ -10,7 +10,7 @@ import linkedinIcon from "../../assets/linked-in.png";
 const Teams = () => {
   return (
     <>
-      <div className="p-10 bg-gray-900 text-center text-white">
+      <div id="team" className="p-10 bg-gray-900 text-center text-white">
         <h2 className="font-extrabold text-4xl leading-tight">Meet the Team</h2>
         <div className="team-container mt-16 flex justify-center gap-16">
           <div className="team-member flex flex-col items-center">
@@ -35,7 +35,7 @@ const Teams = () => {
                 rel="noopener noreferrer"
                 className="team-link inline-flex items-center justify-center w-8 h-8 rounded-full bg-gray-800"
               >
-                <img src={githubIcon} alt="GitHub" className="w-8 h-8" />
+                <img href={githubIcon} alt="GitHub" className="w-8 h-8" />
               </a>
             </div>
           </div>

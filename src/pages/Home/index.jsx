@@ -1,5 +1,5 @@
 import Navbar from './Navbar';
-import Intro from './Intro';
+import Overview from './Overview';
 import Summary from './Summary';
 import Teams from './Teams';
 
@@ -7,7 +7,7 @@ const Home = () => {
   return (
     <>
       <Navbar />
-      <Intro />
+      <Overview />
       <Summary />
       <Teams />
     </>
