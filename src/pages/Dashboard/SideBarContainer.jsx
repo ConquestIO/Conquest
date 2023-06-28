@@ -24,8 +24,6 @@ export default function SideBarContainer() {
                 //fetch all tests associated with the feature for the given user
                 const res = await fetch(`/api/tests/${el.id}`)
                 const data = await res.json()
-                console.log(el.id)
-                console.log(data)
                 //this will update tests in state to be the response which can then be rendered by TestDisplay
                 dispatch(setTests(data))
             }}

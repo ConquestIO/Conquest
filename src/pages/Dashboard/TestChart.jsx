@@ -17,7 +17,7 @@ const normalizedTests = (tests) => {
     else if (el.category === 'e2e') e2eTests.push(el);
   });
 
-  retArr.push(unitTests, e2eTests, integrationTests, functionalTests);
+  retArr.push(unitTests, integrationTests, e2eTests, functionalTests);
 
   return retArr;
 };
@@ -93,7 +93,6 @@ const TestChart = () => {
   const tests = useAppSelector((state) => state.app.tests);
   const [state, setState] = useState(normalizedTests(tests));
   useEffect(() => {
-    console.log(tests)
     setState(normalizedTests(tests));
   }, [tests]);
   function onDragEnd(result) {
@@ -225,7 +224,7 @@ const DraggableCard = (props) => {
           {...provided.draggableProps}
           {...provided.dragHandleProps}
         >
-          <div className='text-sm font-semibold'>{props.item.testName}</div>
+          <div className='text-sm font-semibold'>{props.item.test_name}</div>
           <div className='text-sm'>Description: {props.item.description}</div>
           <div className='text-sm flex items-center gap-2'>
             Status:{' '}
