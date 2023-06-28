@@ -15,9 +15,7 @@ const userController = {
       const values1 = [username];
       const uniqueUsername = await query(text1, values1);
       // if usename not unique, return status code 400 & msg
-      if (uniqueUsername.rows.length) {
-        return res.status(400).send({message: 'Username not available'});
-      }
+      if (uniqueUsername.rows.length) throw new Error('Username not available')
 
       // if usename is unique, add username & hashed password to DB
       const hashedPassword = await bcrypt.hash(password, 10);
@@ -33,7 +31,7 @@ const userController = {
       return next({
         log: `Error in registerUser controller method: ${err}`,
         status: 500,
-        message: "Error while registering new user",
+        message: { err: err.message },
       });
     }
   },
@@ -45,14 +43,14 @@ const userController = {
       const values = [req.body.username];
       const user = await query(text, values);
       if (!user.rows.length) {
-        throw new Error;
+        throw new Error('Incorrect username or password');
       }
       const isMatch = await bcrypt.compare(
         req.body.password,
         user.rows[0].password
       );
       if (!isMatch) {
-        throw new Error;
+        throw new Error('Incorrect username or password');
       }
       const token = jwt.sign(
         { userId: user.rows[0]._id },
