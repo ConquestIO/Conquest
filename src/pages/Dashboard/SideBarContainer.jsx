@@ -16,7 +16,7 @@ export default function SideBarContainer() {
         //Render a button for each created feature
         ...features.map((el) => {
             return (<div className='justify-items-center' key={el.id}>
-                <button className = ' bg-sky-600 text-white w-40 h-10 rounded-md mt-5'
+                <button className = ' bg-sky-500 text-white w-40 h-10 rounded-md mt-5'
               key={el.id}
             onClick = {async () => {
                 //update state to be the current element
@@ -38,7 +38,7 @@ export default function SideBarContainer() {
             </div>)
         }),
         //logout button for sidebar. Clear userId, set logged in to false and reroute to landing page
-        <button className= ' bg-sky-600 w-40 h-10 text-white mt-60 text-base rounded-md'
+        <button className= ' secondary w-40 h-10 text-white mt-16 text-base rounded-md'
         key={'button'}
         onClick={async () => {
                 dispatch(setUserID('none'))
@@ -46,11 +46,11 @@ export default function SideBarContainer() {
                 navigate('/');
         }}
         >
-            Logout
+            Log Out
         </button>,
     ]
     return (
-        <div className= ' bg-gray-200 p-4 rounded-lg border-2 border-black flex-nowrap flex-row h-screen '>
+        <div className= ' bg-gray-200 p-4 rounded-lg flex-nowrap flex-row h-screen overflow-scroll'>
             <FeatureContainer />
             {sidebar}
         </div>
