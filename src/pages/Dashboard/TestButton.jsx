@@ -8,6 +8,7 @@ import { setTestModal } from '../../store/appSlice';
 const TestButton = () => {
     const dispatch = useAppDispatch();
     const openTestModal = useAppSelector((state) => state.app.testModal);
+    const featureID = useAppSelector((state) => state.app.featureID )
     
     const handleButtonClick = () => {
         dispatch(setTestModal(true));
@@ -16,11 +17,16 @@ const TestButton = () => {
       const handleCloseModal = () => {
         dispatch(setTestModal(false));
       };
-    
-      return (
-        <div className='ml-auto h-[60px] flex relative'>
+
+      let testButton;
+
+      if (typeof(featureID) === 'string'){
+         testButton = [<div></div>]
+      } else {
+        testButton = [
+          <div className='ml-auto h-[60px] flex relative w-40'>
           <Button
-            className='ml-auto'
+            className=' mx-auto bg-sky-600 w-40 text-white text-base rounded-md'
             onClick={handleButtonClick}
             variant='secondary' 
           >
@@ -33,6 +39,13 @@ const TestButton = () => {
             <TestForm />
           </Modal>
         </div>
+        ]
+      }
+    
+      return (
+       <div>
+        {testButton}
+       </div>
       );
     };
 
