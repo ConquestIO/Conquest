@@ -22,12 +22,14 @@ export default function SideBarContainer() {
                 //update state to be the current element
                 dispatch(setFeatureID(el));
                 //fetch all tests associated with the feature for the given user
-                await fetch(`/api/tests/${featureID.id}`)
+                const res = await fetch(`/api/tests/${el.id}`)
+                const data = await res.json()
+                console.log(data)
                 //this will update tests in state to be the response which can then be rendered by TestDisplay
-                dispatch(setTests(res))
+                dispatch(setTests(data))
             }}
             >
-            {el.featureName}
+            {el.feature_name}
             </button>
             </div>)
         }),
