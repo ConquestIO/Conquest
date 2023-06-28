@@ -9,8 +9,6 @@ const testsController = {
 
       const values = [featureId];
       const data = await query(text, values);
-      // validate data
-      if (!data.rows.length) throw new Error();
       res.locals.testList = data.rows;
       return next();
     } catch (err) {
