@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { setLoggedIn, setFeatureID, setTests, setUserID } from '../../store/appSlice';
+import { setLoggedIn, setFeatureID, setTests, setUserID, setFeatureName, setDescription } from '../../store/appSlice';
 import FeatureContainer from './FeatureContainer';
 
 export default function SideBarContainer() {
@@ -21,11 +21,17 @@ export default function SideBarContainer() {
             onClick = {async () => {
                 //update state to be the current element
                 dispatch(setFeatureID(el));
+                console.log(el)
                 //fetch all tests associated with the feature for the given user
                 const res = await fetch(`/api/tests/${el.id}`)
                 const data = await res.json()
                 //this will update tests in state to be the response which can then be rendered by TestDisplay
                 dispatch(setTests(data))
+                //update feature name to current feature name
+                dispatch(setFeatureName(el.feature_name))
+                //update description to current feature description
+                dispatch(setDescription(el.description))
+
             }}
             >
             {el.feature_name}
