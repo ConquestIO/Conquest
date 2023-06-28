@@ -20,7 +20,7 @@ const TestButton = () => {
       return (
         <div className='ml-auto h-[60px] flex relative'>
           <Button
-            className='ml-auto'
+            className='ml-auto rounded-mg w-40 h-10 text-base'
             onClick={handleButtonClick}
             variant='secondary' 
           >
