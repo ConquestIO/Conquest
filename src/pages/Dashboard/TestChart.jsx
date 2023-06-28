@@ -1,5 +1,5 @@
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useAppSelector } from '../../store/hooks';
 import Select from 'react-select';
 
@@ -92,7 +92,10 @@ const reorder = (list, startIndex, endIndex) => {
 const TestChart = () => {
   const tests = useAppSelector((state) => state.app.tests);
   const [state, setState] = useState(normalizedTests(tests));
-
+  useEffect(() => {
+    console.log(tests)
+    setState(normalizedTests(tests));
+  }, [tests]);
   function onDragEnd(result) {
     const { source, destination } = result;
 
