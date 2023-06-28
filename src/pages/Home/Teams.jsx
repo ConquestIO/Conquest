@@ -35,7 +35,7 @@ const Teams = () => {
                 rel="noopener noreferrer"
                 className="team-link inline-flex items-center justify-center w-8 h-8 rounded-full bg-gray-800"
               >
-                <img href={githubIcon} alt="GitHub" className="w-8 h-8" />
+                <img src={githubIcon} alt="GitHub" className="w-8 h-8" />
               </a>
             </div>
           </div>
