@@ -49,9 +49,9 @@ const FeatureForm = () => {
         }),
       });
       if (res.status === 201) {
-        await res.json();
+        const data = await res.json();
         //need to update redux state to store new feature list when done
-        dispatch(setFeatures(res));
+        dispatch(setFeatures(data));
       } else {
         alert('Failed to add new feature');
       }

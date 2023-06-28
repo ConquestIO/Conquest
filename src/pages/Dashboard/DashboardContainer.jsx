@@ -9,12 +9,13 @@ export default function DashboardContainer(){
     const userID = useAppSelector((state) => state.app.userID)
 
     //on render, fetch all features associated with user and update state
-    useEffect(() => {
-        (async () => {
-            await fetch(`/api/features`)
-            .then((res) => dispatch(setFeatures(res)))
-        })
-    })
+    useEffect( () => {
+      const getFeatures = async () => {
+        const res = await fetch(`/api/features`)
+        const data = await res.json();
+        dispatch(setFeatures(data))}
+      getFeatures();
+    }, [])
 
     return (
         <div className='flex w-full h-screen'>
