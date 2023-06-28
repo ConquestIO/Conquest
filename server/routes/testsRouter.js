@@ -1,10 +1,10 @@
-import express from "express";
-import testsController from "../controllers/testsController.js";
+import express from 'express';
+import testsController from '../controllers/testsController.js';
 
 const testsRouter = express.Router();
 
 testsRouter.get(
-  "/:featureId",
+  '/:featureId',
   testsController.getTestsList,
   (req, res, next) => {
     return res.status(200).json(res.locals.testList);
@@ -12,7 +12,7 @@ testsRouter.get(
 );
 
 testsRouter.post(
-  "/",
+  '/',
   testsController.createTest,
   testsController.getTestsList,
   (req, res, next) => {
@@ -20,8 +20,13 @@ testsRouter.post(
   }
 );
 
-testsRouter.patch("/", testsController.updateTest, (req, res, next) => {
-  return res.sendStatus(200);
-});
+testsRouter.patch(
+  '/',
+  testsController.updateTest,
+  testsController.getTestsList,
+  (req, res, next) => {
+    return res.status(200).json(res.locals.testList);
+  }
+);
 
 export default testsRouter;

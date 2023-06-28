@@ -39,6 +39,7 @@ const move = (source, destination, droppableSource, droppableDestination) => {
     updateTestCategory({ ...removed }, 'e2e');
   else if (droppableDestination.droppableId == 3)
     updateTestCategory({ ...removed }, 'functional');
+
   return result;
 };
 
@@ -50,7 +51,12 @@ const updateTestCategory = async (test, newCategory) => {
       headers: {
         'Content-Type': 'Application/JSON',
       },
-      body: JSON.stringify(test),
+      body: JSON.stringify({
+        id: test._id,
+        status: test.status,
+        category: test.category,
+        featureId: test.feature_id,
+      }),
     });
   } catch (err) {
     console.log('Update Test Category: ERROR: ', err);
@@ -60,12 +66,17 @@ const updateTestCategory = async (test, newCategory) => {
 const updateTestStatus = async (test, newStatus) => {
   test.status = newStatus;
   try {
-    await fetch('/api/tests', {
+    const res = await fetch('/api/tests', {
       method: 'PATCH',
       headers: {
         'Content-Type': 'Application/JSON',
       },
-      body: JSON.stringify(test),
+      body: JSON.stringify({
+        id: test._id,
+        status: test.status,
+        category: test.category,
+        featureId: test.feature_id,
+      }),
     });
   } catch (err) {
     console.log('Update Test Status: ERROR: ', err);
@@ -95,7 +106,7 @@ const TestChart = () => {
   useEffect(() => {
     setState(normalizedTests(tests));
   }, [tests]);
-  function onDragEnd(result) {
+  const onDragEnd = (result) => {
     const { source, destination } = result;
 
     // dropped outside the list
@@ -116,15 +127,15 @@ const TestChart = () => {
       newState[dInd] = result[dInd];
       setState(newState);
     }
-  }
+  };
 
   const updateStatus = (test, newStatus, location) => {
     updateTestStatus({ ...test }, newStatus);
     test.status = newStatus;
-    const newState = [...state];
+    const newState = state.slice();
 
     for (let i = 0; i < newState[location].length; i++) {
-      if (newState[location][i].id == test.id) {
+      if (newState[location][i].id === test._id) {
         newState[location][i] = test;
         break;
       }
@@ -138,7 +149,7 @@ const TestChart = () => {
         <div className='flex flex-col items-center gap-3 w-[25%] min-w-[196px]'>
           <h1 className='font-bold whitespace-nowrap'>Unit Testing</h1>
           <DroppableCard
-            items={state[0]}
+            items={state[0].slice()}
             droppableId={'0'}
             updateStatus={updateStatus}
             rounded='rounded-l-lg'
@@ -148,7 +159,7 @@ const TestChart = () => {
         <div className='flex flex-col items-center gap-3 w-[25%] min-w-[196px]'>
           <h1 className='font-bold whitespace-nowrap'>Integration Testing</h1>
           <DroppableCard
-            items={state[1]}
+            items={state[1].slice()}
             droppableId={'1'}
             updateStatus={updateStatus}
             className='h-full'
@@ -157,7 +168,7 @@ const TestChart = () => {
         <div className='flex flex-col items-center gap-3 w-[25%] min-w-[196px]'>
           <h1 className='font-bold whitespace-nowrap'>End-to-End Testing</h1>
           <DroppableCard
-            items={state[2]}
+            items={state[2].slice()}
             droppableId={'2'}
             updateStatus={updateStatus}
           />
@@ -165,7 +176,7 @@ const TestChart = () => {
         <div className='flex flex-col items-center gap-3 w-[25%] min-w-[196px]'>
           <h1 className='font-bold whitespace-nowrap'>Functional Testing</h1>
           <DroppableCard
-            items={state[3]}
+            items={state[3].slice()}
             droppableId={'3'}
             updateStatus={updateStatus}
             rounded='rounded-r-lg'
@@ -216,7 +227,7 @@ const DraggableCard = (props) => {
       ? 1
       : 0;
   return (
-    <Draggable draggableId={`${props.item.id}`} index={props.index}>
+    <Draggable draggableId={`${props.item._id}`} index={props.index}>
       {(provided, snapshot) => (
         <div
           className='flex flex-col gap-2 items-left rounded bg-white drop-shadow p-3'
@@ -231,6 +242,8 @@ const DraggableCard = (props) => {
             <button>
               <Select
                 options={statuses}
+                menuPortalTarget={document.body}
+                styles={{ menu: (provided) => ({ ...provided, zIndex: 9999 }) }}
                 onChange={(e) =>
                   props.updateStatus(
                     { ...props.item },

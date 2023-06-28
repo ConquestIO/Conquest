@@ -53,9 +53,9 @@ const testsController = {
       const text = `UPDATE test SET status = $2, category = $3 WHERE _id = $1 AND feature_id = $4`;
 
       const values = [id, status, category, featureId];
-
+      
       const updatedTest = await query(text, values);
-
+      req.params.featureId = featureId;
       return next();
     } catch (err) {
       return next({
