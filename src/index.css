@@ -1,0 +1,76 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary-color: #e2f0f9;
+  --secondary-color: #286fb4;
+  --accent-color: #df4c73;
+
+  font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  /* color: rgba(255, 255, 255, 0.87);
+  background-color: #242424; */
+
+  color: #213547;
+  background-color: #ffffff;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+@layer components {
+  .sideNavBar-icon {
+    @apply relative mx-auto mb-2 mt-2 flex h-12 w-12 cursor-pointer items-center justify-center rounded-md bg-transparent transition duration-75 ease-linear hover:scale-105;
+  }
+
+  .btn {
+    @apply m-2 rounded px-4 py-2 text-xs;
+  }
+  .sm {
+    @apply px-2;
+  }
+
+  .md {
+    @apply px-4;
+  }
+
+  .lg {
+    @apply px-8 text-base;
+  }
+
+  .xl {
+    @apply px-16;
+  }
+
+  .default {
+    @apply border border-gray-300 bg-gray-100 text-gray-900;
+  }
+  .default:hover {
+    @apply border-gray-500;
+  }
+
+  .primary {
+    @apply bg-primary text-gray-800;
+  }
+  .primary:hover {
+    @apply brightness-95;
+  }
+
+  .secondary {
+    @apply bg-secondary font-semibold text-white;
+  }
+  .secondary:hover {
+    @apply brightness-90;
+  }
+
+  .disable-blur {
+    image-rendering: crisp-edges;
+  }
+}
