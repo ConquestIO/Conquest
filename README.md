@@ -19,12 +19,12 @@ This project is a web application that helps software development teams and qual
 
 ## How To Get Started
 
-Insert instructions here
+Access our website at https://conquest-7ffadf4c2da1.herokuapp.com/
+-Sign up or login
+-Add your feature
+-Add your test in the specific feature
 
-## Demo
-
-Insert gif or link to demo
-
+Everything should be ready to go
 
 ## Authors
 
