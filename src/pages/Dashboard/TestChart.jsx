@@ -51,7 +51,12 @@ const updateTestCategory = async (test, newCategory) => {
       headers: {
         'Content-Type': 'Application/JSON',
       },
-      body: JSON.stringify({id:test._id, status:test.status, category:test.category, featureId:test.feature_id}),
+      body: JSON.stringify({
+        id: test._id,
+        status: test.status,
+        category: test.category,
+        featureId: test.feature_id,
+      }),
     });
   } catch (err) {
     console.log('Update Test Category: ERROR: ', err);
@@ -66,7 +71,12 @@ const updateTestStatus = async (test, newStatus) => {
       headers: {
         'Content-Type': 'Application/JSON',
       },
-      body: JSON.stringify({id:test._id, status:test.status, category:test.category, featureId:test.feature_id}),
+      body: JSON.stringify({
+        id: test._id,
+        status: test.status,
+        category: test.category,
+        featureId: test.feature_id,
+      }),
     });
   } catch (err) {
     console.log('Update Test Status: ERROR: ', err);
@@ -117,16 +127,15 @@ const TestChart = () => {
       newState[dInd] = result[dInd];
       setState(newState);
     }
-  }
+  };
 
   const updateStatus = (test, newStatus, location) => {
-    console.log(state)
     updateTestStatus({ ...test }, newStatus);
     test.status = newStatus;
     const newState = state.slice();
 
     for (let i = 0; i < newState[location].length; i++) {
-      if (newState[location][i].id == test.id) {
+      if (newState[location][i].id === test._id) {
         newState[location][i] = test;
         break;
       }
@@ -233,9 +242,9 @@ const DraggableCard = (props) => {
             <button>
               <Select
                 options={statuses}
-                menuPortalTarget={document.body} 
-                styles={{ menu: provided => ({ ...provided, zIndex: 9999 }) }}
-                onChange={(e) => 
+                menuPortalTarget={document.body}
+                styles={{ menu: (provided) => ({ ...provided, zIndex: 9999 }) }}
+                onChange={(e) =>
                   props.updateStatus(
                     { ...props.item },
                     e.value,

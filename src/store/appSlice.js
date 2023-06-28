@@ -12,6 +12,7 @@ const initialState = {
   signupModal: closed,
   featureModal: closed,
   testModal: closed,
+  normalizedTests: [[],[],[],[]]
 };
 
 const appSlice = createSlice({
@@ -51,6 +52,9 @@ const appSlice = createSlice({
     setTestModal: (state, action) => {
       state.testModal = action.payload;
     },
+    setNormalizedTests: (state, action) => {
+      state.normalizedTests = action.payload;
+    },
   },
 });
 
@@ -66,6 +70,7 @@ export const {
   setSignupModal,
   setFeatureModal,
   setTestModal,
+  setNormalizedTests,
 } = appSlice.actions;
 
 export default appSlice.reducer;
