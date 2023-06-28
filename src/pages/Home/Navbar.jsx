@@ -1,5 +1,7 @@
 import AuthContainer from "./Auth/AuthContainer";
 import { Link as NavLink } from "react-scroll";
+import githubIcon from "../../assets/github-mark.svg";
+
 
 const Navbar = () => {
   return (
@@ -30,7 +32,7 @@ const Navbar = () => {
             rel="noreferrer"
           >
             {/* TODO: get icon to show */}
-            <img alt="GitHub" className="w-8 h-8" />
+            <img src={githubIcon} alt="GitHub" className="w-6 h-6" />
           </a>
         </div>
         <div id="header-right" className="flex items-center">
