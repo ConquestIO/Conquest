@@ -57,7 +57,7 @@ const TestForm = () => {
   return (
     <>
       <p className='mb-4 block text-center text-xl font-bold text-gray-700'>
-        Add A Feature
+        Add A Test
       </p>
       <form onSubmit={handleSubmit}>
         <div className='mb-4'>

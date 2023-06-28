@@ -7,8 +7,8 @@ featuresRouter.get("/", featuresController.getFeaturesList, (req, res, next) =>
   res.status(200).json(res.locals.featuresList)
 );
 
-featuresRouter.post("/", featuresController.createFeature, (req, res, next) =>
-  res.sendStatus(201)
+featuresRouter.post("/", featuresController.createFeature, featuresController.getFeaturesList, (req, res, next) =>
+  res.status(201).json(res.locals.featuresList)
 );
 
 export default featuresRouter;
