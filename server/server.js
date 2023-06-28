@@ -7,7 +7,7 @@ import authenticateController from "./controllers/authenticateController.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
