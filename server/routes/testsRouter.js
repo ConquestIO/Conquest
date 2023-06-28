@@ -3,16 +3,21 @@ import testsController from "../controllers/testsController.js";
 
 const testsRouter = express.Router();
 
-testsRouter.get("/:featureId", testsController.getTestsList, (req, res, next) =>
-  res.status(200).send(res.locals.testsList)
+testsRouter.get(
+  "/:feature_id",
+  testsController.getTestsList,
+  (req, res, next) => {
+    //console.log('made it to test get Router');
+    return res.status(200).json(res.locals.testsList);
+  }
 );
 
-testsRouter.post("/", testsController.createTest, (req, res, next) =>
-  res.sendStatus(201)
-);
-
-testsRouter.patch("/", testsController.updateTest, (req, res, next) =>
-  res.sendStatus(200)
-);
+testsRouter.post("/", testsController.createTest, (req, res, next) => {
+  return res.sendStatus(201).json();
+});
+//  Hi Scott & Kinski
+testsRouter.patch("/", testsController.updateTest, (req, res, next) => {
+  return res.sendStatus(200).json();
+});
 
 export default testsRouter;

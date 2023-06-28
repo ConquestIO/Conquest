@@ -17,7 +17,7 @@ app.use(cors());
 //request to router
 // app.use('/test', (req,res) => res.send('IT WORKS'));
 app.use("/user", userRouter);
-app.use("/api", authenticateController.authenticateUser, apiRouter);
+app.use("/api", apiRouter);
 
 // if running from production, serve bundled files
 if (process.env.NODE_ENV === "production") {
@@ -33,7 +33,7 @@ app.use("*", (req, res) => res.status(404).send("Page not found"));
 //express error handler
 app.use((err, req, res, next) => {
   const defaultErr = {
-    log: "Express error handler caught unknown middleware error",
+    log: `Express error handler caught unknown middleware error: ${err}`,
     status: 400,
     message: { err: "An error occurred" },
   };
