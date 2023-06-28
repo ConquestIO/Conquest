@@ -32,7 +32,7 @@ export default function SideBarContainer() {
             </div>)
         }),
         //logout button for sidebar. Clear userId, set logged in to false and reroute to landing page
-        <button className= ' bg-sky-600 w-40 h-10 text-white text-base rounded-md mt-40'
+        <button className= ' bg-sky-600 w-40 h-10 text-white mt-60 text-base rounded-md'
         key={'button'}
         onClick={async () => {
                 dispatch(userID('none'))
