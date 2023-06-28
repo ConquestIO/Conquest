@@ -15,7 +15,7 @@ const featuresController = {
       const data = await query(text, values);
 
       // validate data before storage
-      if (!data.rows.length) throw new Error;
+      // if (!data.rows.length) throw new Error;
       res.locals.featuresList = await data.rows;
       return next();
     } catch (err) {
