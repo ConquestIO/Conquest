@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { setLoggedIn, setFeatureID, setTests, setUserID } from '../../store/appSlice';
+import { setLoggedIn, setFeatureID, setTests, setUserID, setFeatureName, setDescription } from '../../store/appSlice';
 import FeatureContainer from './FeatureContainer';
 
 export default function SideBarContainer() {
@@ -13,7 +13,7 @@ export default function SideBarContainer() {
     const navigate = useNavigate();
 
     let sidebar = [
-        //Render a button for each created feature (may have to switch to map)
+        //Render a button for each created feature
         ...features.map((el) => {
             return (<div className='justify-items-center' key={el.id}>
                 <button className = ' bg-sky-600 text-white w-40 h-10 rounded-md mt-5'
@@ -26,6 +26,11 @@ export default function SideBarContainer() {
                 const data = await res.json()
                 //this will update tests in state to be the response which can then be rendered by TestDisplay
                 dispatch(setTests(data))
+                //update feature name to current feature name
+                dispatch(setFeatureName(el.feature_name))
+                //update description to current feature description
+                dispatch(setDescription(el.description))
+
             }}
             >
             {el.feature_name}
