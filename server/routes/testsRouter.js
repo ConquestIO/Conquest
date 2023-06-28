@@ -12,12 +12,18 @@ testsRouter.get(
   }
 );
 
-testsRouter.post("/", testsController.createTest, (req, res, next) => {
-  return res.sendStatus(201).json();
-});
-//  Hi Scott & Kinski
+// TODO: is the endpoint correct? should it just be /? /createTest?
+testsRouter.post(
+  "/",
+  testsController.createTest,
+  (req, res, next) => {
+    return res.sendStatus(201);
+  }
+);
+
+// TODO: is the endpoint correct? should it just be /? /updateTest?
 testsRouter.patch("/", testsController.updateTest, (req, res, next) => {
-  return res.sendStatus(200).json();
+  return res.sendStatus(200);
 });
 
 export default testsRouter;
