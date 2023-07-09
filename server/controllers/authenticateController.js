@@ -5,7 +5,7 @@ dotenv.config();
 
 const authenticateController = {
   authenticateUser: async (req, res, next) => {
-    console.log("<--authenticateController - authenticateUser is invoked-->");
+
     const token = req.cookies.jwtToken;
     if (!token) {
       return res.status(400).json({ message: "No token provided" });

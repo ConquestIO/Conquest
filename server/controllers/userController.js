@@ -7,7 +7,7 @@ dotenv.config();
 
 const userController = {
   registerUser: async (req, res, next) => {
-    console.log("<--userController - registerUser is invoked-->");
+
     const { username, password } = req.body;
 
     try {
@@ -37,7 +37,7 @@ const userController = {
   },
 
   loginUser: async (req, res, next) => {
-    console.log("<--userController - loginUser is invoked-->");
+
     try {
       const text = "SELECT * FROM users WHERE username = $1;";
       const values = [req.body.username];
