@@ -11,10 +11,11 @@ const userController = {
     const { username, password } = req.body;
 
     try {
+      // validate whether username exists in DB (to ensure unique username)
       const text1 = "SELECT * FROM users WHERE username = $1;";
       const values1 = [username];
       const uniqueUsername = await query(text1, values1);
-      // if usename not unique, return status code 400 & msg
+
       if (uniqueUsername.rows.length) throw new Error('Username not available')
 
       // if usename is unique, add username & hashed password to DB
@@ -39,6 +40,7 @@ const userController = {
   loginUser: async (req, res, next) => {
 
     try {
+      // validate whether username exists in DB
       const text = "SELECT * FROM users WHERE username = $1;";
       const values = [req.body.username];
       const user = await query(text, values);
@@ -52,11 +54,13 @@ const userController = {
       if (!isMatch) {
         throw new Error('Incorrect username or password');
       }
+      // create jwt token if username & password match
       const token = jwt.sign(
         { userId: user.rows[0]._id },
         process.env.JWT_SECRET,
         { expiresIn: "1h" }
       );
+      // store token in cookie
       res.cookie("jwtToken", token, { httpOnly: true });
       res.locals.user = {
         token,

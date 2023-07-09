@@ -2,7 +2,7 @@ import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 
 dotenv.config();
-
+// authenticate user by checking whether jwt token exists in cookies
 const authenticateController = {
   authenticateUser: async (req, res, next) => {
 
