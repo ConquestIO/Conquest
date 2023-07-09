@@ -3,7 +3,6 @@ import query from '../models/testTrackerModel.js';
 const featuresController = {
   // get full list of features from DB for specific user
   getFeaturesList: async (req, res, next) => {
-    console.log('<--featuresController - getFeaturesList is invoked-->');
 
     const { userId } = req.user;
 
@@ -14,8 +13,6 @@ const featuresController = {
 
       const data = await query(text, values);
 
-      // validate data before storage
-      // if (!data.rows.length) throw new Error;
       res.locals.featuresList = await data.rows;
       return next();
     } catch (err) {
@@ -30,7 +27,6 @@ const featuresController = {
 
   // create a new feature in DB for specific user
   createFeature: async (req, res, next) => {
-    console.log('<--featuresController - createFeature is invoked-->');
 
     const { featureName, description } = req.body;
     const { userId } = req.user;
