@@ -1,7 +1,7 @@
 import query from "../models/testTrackerModel.js";
 const testsController = {
   getTestsList: async (req, res, next) => {
-    console.log("<--testsController - getTestsList is invoked-->");
+
     const { featureId } = req.params;
     // make a db query based on feauture id
     try {
@@ -21,7 +21,6 @@ const testsController = {
   },
 
   createTest: async (req, res, next) => {
-    console.log("<--testsController - createTest is invoked-->");
 
     const { featureId, testName, description, status, category } = req.body;
 
@@ -46,14 +45,14 @@ const testsController = {
   },
 
   updateTest: async (req, res, next) => {
-    console.log("<--testsController - updateTest is invoked-->");
+
     const { id, status, category, featureId } = req.body;
 
     try {
       const text = `UPDATE test SET status = $2, category = $3 WHERE _id = $1 AND feature_id = $4`;
 
       const values = [id, status, category, featureId];
-      
+
       const updatedTest = await query(text, values);
       req.params.featureId = featureId;
       return next();

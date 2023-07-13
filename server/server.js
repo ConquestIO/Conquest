@@ -14,10 +14,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(cors());
 
-//request to router
-// app.use('/test', (req,res) => res.send('IT WORKS'));
+// direct requests to respective router
 app.use("/user", userRouter);
-app.use("/api", authenticateController.authenticateUser, apiRouter);
+app.use("/api", authenticateController.authenticateUser, apiRouter); // authenticate user before routed to apiRouter
 
 // if running from production, serve bundled files
 if (process.env.NODE_ENV === "production") {
@@ -27,7 +26,7 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
-//catch-all route handler for any requests
+//catch-all route handler
 app.use("*", (req, res) => res.status(404).send("Page not found"));
 
 //express error handler
