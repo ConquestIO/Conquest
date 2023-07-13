@@ -6,14 +6,16 @@ const mockRequestData = {
   password: 'password'
 }
 
+ // add mockResolvedResponse
+
 describe('POST /user/login', () => {
 
   describe('give a username and password', () => {
     // should save username & password to DB
     // should respond with json object containing username & jwt token
 
-    test.only('should respond with a 200 status code', async () => {
-      const response = await request(server).post('/user/login').send(mockRequestData)
+    test('should respond with a 200 status code', async () => {
+      const response = await request(server).post('/user/login').send(mockRequestData);
       expect(response.statusCode).toBe(200);
     })
 
@@ -23,16 +25,16 @@ describe('POST /user/login', () => {
     })
 
       test('response body should contain username', async () => {
-      const response = await request(server).post('/user/login').send(mockRequestData)
+      const response = await request(server).post('/user/login').send(mockRequestData);
       expect(response.body.username).toBeDefined();
     })
   })
 
   describe('when the username and password is missing', () => {
       test('should respond with a status code of 500', async () => {
-        const dataList = [{username: 'username'},{password: 'password'}]
+        const mockRequestDataList = [{username: 'username'},{password: 'password'}];
 
-        for (const data of dataList){
+        for (const data of mockRequestDataList){
           const response = await request(server).post('/user/login').send(data)
           expect(response.statusCode).toBe(500);
         }
