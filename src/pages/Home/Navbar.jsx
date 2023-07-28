@@ -13,7 +13,7 @@ const Navbar = () => {
             spy={true}
             smooth={true}
             duration={500}
-            className="hover:underline"
+            className="hover:underline cursor-pointer"
           >
             Overview
           </NavLink>
@@ -22,7 +22,7 @@ const Navbar = () => {
             spy={true}
             smooth={true}
             duration={500}
-            className="hover:underline"
+            className="hover:underline cursor-pointer"
           >
             Team
           </NavLink>
@@ -32,7 +32,7 @@ const Navbar = () => {
             rel="noreferrer"
           >
             {/* TODO: get icon to show */}
-            <img src={githubIcon} alt="GitHub" className="w-6 h-6" />
+            <img src={githubIcon} alt="GitHub" className="w-6 h-6 cursor-pointer" />
           </a>
         </div>
         <div id="header-right" className="flex items-center">
