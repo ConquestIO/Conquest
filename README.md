@@ -1,8 +1,6 @@
-
 # Conquest
 
 This project is a web application that helps software development teams and quality assurance engineers track their testing efforts and ensure comprehensive testing coverage for their applications. It provides a centralized platform where users can monitor the progress of testing for each feature, identify areas that need attention, and improve overall software quality. The goal is to streamline testing processes, enhance visibility, and provide insights into testing coverage to deliver reliable and robust software applications.
-
 
 ## Built With
 
@@ -19,19 +17,19 @@ This project is a web application that helps software development teams and qual
 
 ## How To Get Started
 
-Access our website at https://conquest-7ffadf4c2da1.herokuapp.com/
+Access the application at https://conquest-7ffadf4c2da1.herokuapp.com/
 
--Sign up or login
+-Sign up or Login
 
 -Add your feature
 
 -Add your test for the specific feature
 
-Everything should be ready to go
+Enjoy Testing!
 
 ## Image
-![demo](https://github.com/ConquestIO/Conquest/assets/129810257/d904b4fb-e30b-431f-8ea6-0f6eafe2a417)
 
+![demo](https://github.com/ConquestIO/Conquest/assets/129810257/d904b4fb-e30b-431f-8ea6-0f6eafe2a417)
 
 ## Authors
 
@@ -40,7 +38,6 @@ Everything should be ready to go
 - [Kinski Wu](https://github.com/kinskiwu)
 - [Hunter Shaw](https://github.com/HShaw215)
 - [Julian Babon](https://github.com/babonjmc)
-
 
 ## License
 
